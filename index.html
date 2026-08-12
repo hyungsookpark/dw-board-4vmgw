@@ -855,7 +855,7 @@ body{background:var(--bg);color:var(--text-primary);font-family:'Pretendard Vari
       <div class="col-hdr"><div class="col-dot" style="background:var(--toss)"></div><div class="col-title"><span class="period-tag live">LIVE</span><span class="period-tag today" style="margin-left:4px;font-size:10px;opacity:.85">이번 달</span><span class="col-ico" aria-hidden="true">✍️</span> 계약 체결 라이브</div><div class="col-cnt" id="ctTotal">2</div><div class="col-u">건</div></div><div class="col-monthly" data-card="contract"><span class="col-monthly-data">1월 4건 · 2월 7건 · 3월 6건 · 4월 15건 · 5월 4건 · 6월 9건 · 7월 2건 · 8월 2건</span><span class="col-monthly-tail">2026년</span></div><div class="col-inner" id="contractFeed" aria-live="polite" aria-atomic="false" aria-relevant="additions"></div>
     </div>
     <div class="dual-col">
-      <div class="col-hdr"><div class="col-dot" style="background:var(--cyan)"></div><div class="col-title"><span class="period-tag live">LIVE</span><span class="period-tag today" style="margin-left:4px;font-size:10px;opacity:.85">이번 달</span><span class="col-ico" aria-hidden="true">💰</span> 입금 완료 라이브</div><div class="col-cnt" id="pmTotal">16</div><div class="col-u">건</div></div><div class="col-monthly" data-card="payment"><span class="col-monthly-data">1월 2건 · 4월 20건 · 5월 44건 · 6월 212건 · 7월 51건 · 8월 6건</span><span class="col-monthly-tail">2026년</span></div><div class="col-inner" id="paymentFeed" aria-live="polite" aria-atomic="false" aria-relevant="additions"></div>
+      <div class="col-hdr"><div class="col-dot" style="background:var(--cyan)"></div><div class="col-title"><span class="period-tag live">LIVE</span><span class="period-tag today" style="margin-left:4px;font-size:10px;opacity:.85">이번 달</span><span class="col-ico" aria-hidden="true">💰</span> 입금 완료 라이브</div><div class="col-cnt" id="pmTotal">17</div><div class="col-u">건</div></div><div class="col-monthly" data-card="payment"><span class="col-monthly-data">1월 2건 · 4월 20건 · 5월 44건 · 6월 212건 · 7월 51건 · 8월 7건</span><span class="col-monthly-tail">2026년</span></div><div class="col-inner" id="paymentFeed" aria-live="polite" aria-atomic="false" aria-relevant="additions"></div>
     </div>
   </div>
 </section>
@@ -1069,6 +1069,7 @@ cHist.forEach((d,i)=>$('contractFeed').appendChild(cItem(d,i)));
 
 const pHist = [
   {co:'허*편*신*외*',amt:2356500,time:'8/10'},
+  {co:'메*올',amt:220000,time:'8/10'},
   {co:'큰*랑*양*원',amt:1920100,time:'8/7'},
   {co:'목*원*한*병*',amt:132000,time:'8/7'},
   {co:'(주)원*밀*디*인',amt:165000,time:'8/7'},
@@ -1076,8 +1077,7 @@ const pHist = [
   {co:'(주)원*건*',amt:165000,time:'8/7'},
   {co:'칠*신*협*조*',amt:383200,time:'8/7'},
   {co:'평*이*3*5*원',amt:220000,time:'8/5'},
-  {co:'알*(*U*성*외*',amt:165000,time:'8/5'},
-  {co:'전*영*현*영*증*',amt:1650000,time:'8/4'}
+  {co:'알*(*U*성*외*',amt:165000,time:'8/5'}
 ];
 function pItem(d,i,isNew){const e=document.createElement('div');e.className='fi';
   e.innerHTML=`<div class="fi-status" style="background:var(--cyan)"></div><div class="fi-info"><div class="fi-team">${d.co}</div><div class="fi-meta">입금 완료 · ${d.time||'방금'}</div></div>${isNew?'<span class="fi-new">NEW</span>':''}<div class="fi-amt">${fmt(d.amt)}</div>`;
@@ -1107,45 +1107,43 @@ let AI_MVP_DATA = {
   ],
   /* [v8 인사팀] 베스트 사례 — 전일 작성 일지 중 점수 높은 순으로 회전 */
   bestCases: [
-      {name:'김우석',team:'기업지원팀',date:'8/11',title:'[사실] 사용자가 \'일반근로자·일용근로자 동시 재직 시 이중집계\' 문제를 지적하자, Claude가 파이프라인…',body:'[사실] 오늘(2026-08-11) 세션 1건에서 장애인고용부담금 상시근로자수 산정 스킬(disability-employment-levy-review) 로직 개선 및 사업장 4곳(동일의료재단, 세계로병원, 우아의료재단, 혜명심의료재단 울산병원) 재산출 작업 진행. [사실] 일반근로자·일용근로자 동시 재직 시 이중집계 문제를 해결하기 위해 파이프라인 스크립트에 중복인원(O) 컬럼을 추가하고, 4개 사업장 36개월치 데이터를 Python으로 독립 재계산해 엑셀 수식과 전항목 대사함. [사실] 결과를 스킬 문서(SKILL.md)에 2회…',tool:'Claude',score:9},
-      {name:'박진아',team:'경영지원팀',date:'8/11',title:'지급수수료 51,830원 \'유령 조정\' 추적·정정. 손익 저장값(3,061,835)과 raw 실측값(3,01…',body:'1. 7월 월마감 손익계산서 정정·검증 (능동 대화, 오늘 핵심 업무) - 삼무조경 화환 56,000원 복리후생비(공제) → 접대비(불공) 재분류, 매입세액 5,091원 공제 취소 (부가세법 39-1-6) - 대전지사 임차료 1,155,000원 \'미해당 → 공제\' 정정, 공급가액 1,050,000 / 매입세액 105,000 반영 - 지급수수료 \'유령 조정\' 51,830원 추적 후 제거 (세전 3,061,835 → 3,010,005, 매입세액 275,258 → 223,428) - 본사 복리후생비 공제매입세액(1,434,988원…',tool:'Claude',score:9},
-      {name:'유슬아',team:'HR사업본부',date:'8/11',title:'[사실] 산재 블로그 작업에서 "공상처리 이미 했었어 다른 주제"라는 한 줄 피드백만으로 즉시 중복을 회피하…',body:'[사실] 두 가지 업무에 AI를 활용했습니다. ① 풍산 사내근로복지기금 3차 강의안(FAQ) 수정본(수정2.pptx)의 조판 오류(cs/latin 폰트 불일치 345건, 구두점 앞뒤 간격 삽입 783건)를 자동 탐지·일괄 수정하고, PPTX 내부 XML 직접 조작 + LibreOffice UNO 문단 속성 변경 후 19페이지 검증을 통과한 최종 PDF를 산출했습니다. ② 산재 일반 블로그 원고를 작성했습니다 — 주제 후보를 받아 기존 발행분(공상처리·휴업급여)과 중복을 피해 \'상병보상연금\'을 선정하고, WebSearch로 산재보험법…',tool:'Claude',score:8.5},
-      {name:'박형숙',team:'경영지원팀',date:'8/11',title:'대시보드를 웹 자동 배포까지 연결해, 파일만 갱신하면 누구나 링크로 최신 현황을 보게 만든 것',body:'1. 인사팀 AI 활용 대시보드 웹 자동화 생성 — GitHub Pages 배포 연동으로 로컬 파일 갱신 시 웹에 자동 반영되는 구조 구축·검증 2. 지원자 서류 기반 맞춤 면접 질문 자동 생성 업무에 AI 활용 3. 직원 생일자 캘린더 정리 및 등록 업무에 AI 활용 4. 대시보드 일일 자동 동기화 운영 (활용일지 집계·베스트 사례·계약/입금 현황 자동 반영, 2회 실행) 5. 전일 AI 활용일지 베스트 사례 자동 선별 및 시트 입력용 데이터 정리 (자동화 실행)',tool:'Claude',score:8},
-      {name:'이새봄',team:'HR사업본부',date:'8/11',title:'김상곤님 소음성난청 산재 서류 작업. 단순 서식 채우기가 아니라 소음 노출 이력·상병 경위를 산재보험법상 업…',body:'① 앨트웰텍 사내근로복지기금 도입 설명용 대본 작성 — 제도 취지·출연·수혜 구조를 구두 설명 흐름으로 정리 ② 김상곤님 소음성난청 산재 서류 작성 — 요양급여신청 관련 서류 초안 작업(사업장 소음 노출 이력·상병 경위 정리) ③ 성남시 수정구 관할 근로복지공단 담당지사 위치 확인 — 제출처 확인용 정보 조회 (Cowork 외 Claude 채팅 세션에서 수행되어 전문 자동 수집은 불가, 세션 제목 기준으로 정리)',tool:'Claude',score:7},
-      {name:'이성미',team:'노무관리팀',date:'8/11',title:'[사실] 부강티엔씨의 \'근무지 이전으로 인한 권고사직\' 문의에 대해, Claude가 고용보험법 시행규칙 별표…',body:'[사실] 오늘 확인된 실제 업무 대화는 진행 중인 \'역삼아 관련 정보 조회\' 세션 1건. 세부적으로 ① 세종안성 4공구 전자카드 사용내역과 근로내역신고 인원 대사(외국인 근로자 1명 미매칭 특정), ② 통근곤란 권고사직 관련 법령(고용보험법 시행규칙 별표2 제6호) 원문 확인 및 상실사유 코드(12, 세부 통근곤란) 안내, ③ 부강티엔씨 앞 회신 메일 초안 작성(장문→간결본 재작성), ④ 특고 노무제공자 김성구님 고용보험 0원 사유 분석. [불확실] 세션 생성 시각을 직접 조회하는 도구가 없어, 전일(8/10) 자동 실행 시 이미…',tool:'Claude',score:7},
-      {name:'곽대영',team:'기업지원팀',date:'8/11',title:'[사실] 「4대보험 연구일지」 노션 DB 20건 전수 조회·구조화. 단순 나열이 아니라 (1) 2023년 어…',body:'[사실] 직전 일지 실행(08-10 09:11) 이후 신규 사용자 세션 1건 — 「Notion page review」. ① [사실] 노션 「📔[업무] 4대보험 연구일지」 페이지 전수 조회 → 인라인 DB 「[업무] 연구현황」 20건을 상태별 분류(연구중 4 / 테스트 2 / 종료-도입 6 / 종료-폐기 8)하고 시작일·연구대상·기대효과·연구결과를 표로 정리. ② [사실] 2차 요청 — 분할법인 개별실적요율 적용여부 / 고안직능 요율변경 구조화 / 임원 퇴직금 상한 초과분 처리 / 생산직비과세 계산모델 4개 항목에 대해 (1) 법령…',tool:'Claude',score:6},
-      {name:'정보람',team:'기업지원팀',date:'8/11',title:'아침 자동 브리핑 ‘오늘 담당 사업장 수신 메일 요약’ → Claude가 담당 30개 사업장을 노션 ‘보람…',body:'[보정본] 자동수집(코워크 세션)으로는 아침 메일 브리핑 1건만 잡혔으나, 실제로는 표·데이터 정리 대화를 다수 사용함 — 본인 확인분: ‘해인산업 대상자 확인 표’, ‘기존 표 색상 확인’, ‘Content organization’. 업무일지상 오늘 실제 업무: 윤병원 출산육아기 자료요청, 봉화해성병원·서울내과정형외과·케이디산업·은곡운수·새빛병원 등 다수 사업장 소통, 출산육아기·직장복귀·산재 대체인력 검토. ※ 두 소스 모두 AI 사용을 과소집계함(사이드바 일반 채팅 자동수집 불가 + 업무일지에 Claude 사용을 잘 안 적음)…',tool:'Claude',score:6},
-      {name:'김동우',team:'기업지원팀',date:'8/11',title:'[Cowork] Gmail 자동 분류 세션. 53건 메일을 규칙 매칭으로 처리하는 데서 멈추지 않고, ① L…',body:'[Cowork] 일일 메일 브리핑(Daily mail log) — 공용함 수신함을 스캔해 수신 19건을 집계하고, 미회신 추적 상태파일과 대조하여 미회신 263건(신규 +18)·긴급 46건·실무To-Do 296건을 산출. 슬랙 #00_기업지원팀_자동알림에 본체/미회신 담당자별/실무To-Do 3개 스레드로 분할 발송하고 통합데이터_2026-08.xlsx 4개 시트에 append. 화요일이라 STEP 4.5 지급추적은 스킵, 상태파일은 미회신_추적상태.backup_20260811.json으로 백업. [Cowork] Gmail→노션 연…',tool:'Claude',score:5},
-      {name:'조소윤',team:'HR사업본부',date:'8/11',title:'[의견] 오늘 일정 알림 → 4건의 회의/외근 일정을 시간대·참석자별 표로 정리해 전달 → 활용도 평가: 하…',body:'[사실] 오늘(2026-08-11) 기준 확인된 활동은 자동화 스케줄 작업 2건뿐임(오전 9시 30분대 실행). (1) 견적서 발송 메일 자동 확인 — Gmail 검색으로 당일 발송된 견적서 유무 확인(당일 발송 건 없음, 어제자 와이톤 건은 제외 처리). (2) 오늘 일정 자동 알림 — 캘린더 연동으로 오늘의 회의·외근 일정을 조회해 표로 정리해 전달. [사실] 소윤님이 직접 채팅으로 업무를 요청한 대화 기록은 이 시점까지 확인되지 않음.',tool:'Claude',score:2}
-    ],
+    {name:'김우석', team:'기업지원팀', date:'8/11', title:'사용자가 \'일반근로자·일용근로자 동시 재직 시 이중집계\' 문제를 지적하자…', body:'[사실] 사용자가 \'일반근로자·일용근로자 동시 재직 시 이중집계\' 문제를 지적하자, Claude가 파이프라인 코드 수정(중복인원 O컬럼)→4개 사업장 재산출→Python 독립계산 대비 전항목 일치 검증까지 한 대화 흐름에서 완결함. [의견] 단순 질의응답이 아니라 \'코드 수정→실행→교차검증\'까지 이어진 복합 작업이라는 점에서 오늘 대화 중 활용도가 가장 높…', tool:'Claude', score:9},
+    {name:'박진아', team:'경영지원팀', date:'8/11', title:'지급수수료 51,830원 \'유령 조정\' 추적·정정.', body:'지급수수료 51,830원 \'유령 조정\' 추적·정정. 손익 저장값(3,061,835)과 raw 실측값(3,010,005)의 차이를 ① raw 44건 전량 재계산 ② 하나카드 7월 사용분 41건 전수 확인(전부 ANTHROPIC·OPENAI 해외일시불로 지급수수료 성격 0건) ③ 51,800~52,500원 구간 raw 역검색의 3중 검증으로 \'실체 없음\'을 확…', tool:'Claude', score:9},
+    {name:'박형숙', team:'경영지원팀', date:'8/11', title:'대시보드를 웹 자동 배포까지 연결해, 파일만 갱신하면 누구나 링크로 최신…', body:'대시보드를 웹 자동 배포까지 연결해, 파일만 갱신하면 누구나 링크로 최신 현황을 보게 만든 것', tool:'Claude', score:8},
+    {name:'이새봄', team:'HR사업본부', date:'8/11', title:'김상곤님 소음성난청 산재 서류 작업.', body:'김상곤님 소음성난청 산재 서류 작업. 단순 서식 채우기가 아니라 소음 노출 이력·상병 경위를 산재보험법상 업무상 질병 인정기준(시행령 별표 3, 소음성 난청 요건: 85dB 이상 연속 3년 이상 노출·한 귀 40dB 이상 감각신경성 난청)에 맞춰 정리하는 방향으로 AI를 활용한 점이 가장 효율적이었음.', tool:'Claude', score:7},
+    {name:'곽대영', team:'기업지원팀', date:'8/11', title:'「4대보험 연구일지」 노션 DB 20건 전수 조회·구조화.', body:'[사실] 「4대보험 연구일지」 노션 DB 20건 전수 조회·구조화. 단순 나열이 아니라 (1) 2023년 어선원·선원 이슈 5건은 전부 폐기, 2025년 이후 임채부담금·개별실적요율·비과세 주제는 도입률이 높다는 주제 이동 패턴 도출 (2) 미완결 4건 중 분할법인·양도양수 2건은 \'사업장 승계 시 요율 승계\'라는 동일 논점이므로 통합 관리 제안 (3) 연…', tool:'Claude', score:6},
+    {name:'정보람', team:'기업지원팀', date:'8/11', title:'아침 자동 브리핑 \'오늘 담당 사업장 수신 메일 요약\' → Claude가…', body:'아침 자동 브리핑 \'오늘 담당 사업장 수신 메일 요약\' → Claude가 담당 30개 사업장을 노션 \'보람 전체 사업장\' 뷰로 조회하고 Gmail 수신함 50건을 교차 필터링해, 담당 사업장 메일 1건(더조은요양병원 검토결과 안내)만 정확히 추려 표로 정리. 본인 발신 메일은 규칙대로 제외하는 판단까지 자동 수행.', tool:'Claude', score:6},
+    {name:'김동우', team:'기업지원팀', date:'8/11', title:'Gmail 자동 분류 세션.', body:'[Cowork] Gmail 자동 분류 세션. 53건 메일을 규칙 매칭으로 처리하는 데서 멈추지 않고, ① Label_7(신민규)이 Gmail에 실재하지 않아 labelId not found가 발생한다는 사실 ② 정보람 매니저 메일 4건이 규칙에 없어 전부 누락되지만 실제로는 Label_15가 존재한다는 사실 ③ productivity-report@mails…', tool:'Claude', score:5},
+    {name:'조소윤', team:'HR사업본부', date:'8/11', title:'오늘 일정', body:'[의견] 오늘 일정 알림 → 4건의 회의/외근 일정을 시간대·참석자별 표로 정리해 전달 → 활용도 평가: 하루 일정 파악에 실용적이었으나, 사용자가 직접 질의한 것이 아닌 자동 알림이라 활용 깊이는 제한적.', tool:'Claude', score:2}
+  ],
   bestCaseRangeLabel: '8/11',
   /* [v8 인사팀] 팀별 활용 분포 — 이번 달 누적 일지 건수 (내림차순)
      주: 급여파트는 노무관리팀에 합산 (TEAM_ALIAS) */
   weeklyGrid: [
-    {team:'기업지원팀', total:11, avgRate:36, weekEntries:12, daily:[
+    {team:'기업지원팀', total:11, avgRate:46, weekEntries:13, daily:[
       {dateStr:'2026-08-10', used:4, entries:7, rate:36, isFuture:false},
-      {dateStr:'2026-08-11', used:4, entries:5, rate:36, isFuture:false},
+      {dateStr:'2026-08-11', used:6, entries:6, rate:55, isFuture:false},
       {dateStr:'2026-08-12', used:0, entries:0, rate:0, isFuture:true},
       {dateStr:'2026-08-13', used:0, entries:0, rate:0, isFuture:true},
       {dateStr:'2026-08-14', used:0, entries:0, rate:0, isFuture:true}
     ]},
-    {team:'노무관리팀', total:10, avgRate:20, weekEntries:6, daily:[
+    {team:'노무관리팀', total:10, avgRate:25, weekEntries:5, daily:[
       {dateStr:'2026-08-10', used:3, entries:3, rate:30, isFuture:false},
-      {dateStr:'2026-08-11', used:1, entries:3, rate:10, isFuture:false},
+      {dateStr:'2026-08-11', used:2, entries:2, rate:20, isFuture:false},
       {dateStr:'2026-08-12', used:0, entries:0, rate:0, isFuture:true},
       {dateStr:'2026-08-13', used:0, entries:0, rate:0, isFuture:true},
       {dateStr:'2026-08-14', used:0, entries:0, rate:0, isFuture:true}
     ]},
-    {team:'HR사업본부', total:8, avgRate:26, weekEntries:7, daily:[
+    {team:'HR사업본부', total:8, avgRate:26, weekEntries:6, daily:[
       {dateStr:'2026-08-10', used:1, entries:3, rate:13, isFuture:false},
-      {dateStr:'2026-08-11', used:3, entries:4, rate:38, isFuture:false},
+      {dateStr:'2026-08-11', used:3, entries:3, rate:38, isFuture:false},
       {dateStr:'2026-08-12', used:0, entries:0, rate:0, isFuture:true},
       {dateStr:'2026-08-13', used:0, entries:0, rate:0, isFuture:true},
       {dateStr:'2026-08-14', used:0, entries:0, rate:0, isFuture:true}
     ]},
-    {team:'경영지원팀', total:3, avgRate:67, weekEntries:5, daily:[
+    {team:'경영지원팀', total:3, avgRate:67, weekEntries:4, daily:[
       {dateStr:'2026-08-10', used:2, entries:2, rate:67, isFuture:false},
-      {dateStr:'2026-08-11', used:2, entries:3, rate:67, isFuture:false},
+      {dateStr:'2026-08-11', used:2, entries:2, rate:67, isFuture:false},
       {dateStr:'2026-08-12', used:0, entries:0, rate:0, isFuture:true},
       {dateStr:'2026-08-13', used:0, entries:0, rate:0, isFuture:true},
       {dateStr:'2026-08-14', used:0, entries:0, rate:0, isFuture:true}
