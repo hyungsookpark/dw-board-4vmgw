@@ -852,10 +852,10 @@ body{background:var(--bg);color:var(--text-primary);font-family:'Pretendard Vari
 <section class="card contract-card live-row" id="cardDual" aria-label="계약 체결 및 입금 완료 실시간 피드" style="grid-row:3;grid-column:1/3;">
   <div class="dual-feed">
     <div class="dual-col">
-      <div class="col-hdr"><div class="col-dot" style="background:var(--toss)"></div><div class="col-title"><span class="period-tag live">LIVE</span><span class="period-tag today" style="margin-left:4px;font-size:10px;opacity:.85">이번 달</span><span class="col-ico" aria-hidden="true">✍️</span> 계약 체결 라이브</div><div class="col-cnt" id="ctTotal">6</div><div class="col-u">건</div></div><div class="col-monthly" data-card="contract"><span class="col-monthly-data">1월 4건 · 2월 7건 · 3월 6건 · 4월 15건 · 5월 4건 · 6월 9건 · 7월 2건 · 8월 6건</span><span class="col-monthly-tail">2026년</span></div><div class="col-inner" id="contractFeed" aria-live="polite" aria-atomic="false" aria-relevant="additions"></div>
+      <div class="col-hdr"><div class="col-dot" style="background:var(--toss)"></div><div class="col-title"><span class="period-tag live">LIVE</span><span class="period-tag today" style="margin-left:4px;font-size:10px;opacity:.85">이번 달</span><span class="col-ico" aria-hidden="true">✍️</span> 계약 체결 라이브</div><div class="col-cnt" id="ctTotal">10</div><div class="col-u">건</div></div><div class="col-monthly" data-card="contract"><span class="col-monthly-data">1월 4건 · 2월 7건 · 3월 6건 · 4월 15건 · 5월 4건 · 6월 9건 · 7월 2건 · 8월 10건</span><span class="col-monthly-tail">2026년</span></div><div class="col-inner" id="contractFeed" aria-live="polite" aria-atomic="false" aria-relevant="additions"></div>
     </div>
     <div class="dual-col">
-      <div class="col-hdr"><div class="col-dot" style="background:var(--cyan)"></div><div class="col-title"><span class="period-tag live">LIVE</span><span class="period-tag today" style="margin-left:4px;font-size:10px;opacity:.85">이번 달</span><span class="col-ico" aria-hidden="true">💰</span> 입금 완료 라이브</div><div class="col-cnt" id="pmTotal">38</div><div class="col-u">건</div></div><div class="col-monthly" data-card="payment"><span class="col-monthly-data">1월 2건 · 4월 20건 · 5월 44건 · 6월 212건 · 7월 54건 · 8월 28건</span><span class="col-monthly-tail">2026년</span></div><div class="col-inner" id="paymentFeed" aria-live="polite" aria-atomic="false" aria-relevant="additions"></div>
+      <div class="col-hdr"><div class="col-dot" style="background:var(--cyan)"></div><div class="col-title"><span class="period-tag live">LIVE</span><span class="period-tag today" style="margin-left:4px;font-size:10px;opacity:.85">이번 달</span><span class="col-ico" aria-hidden="true">💰</span> 입금 완료 라이브</div><div class="col-cnt" id="pmTotal">161</div><div class="col-u">건</div></div><div class="col-monthly" data-card="payment"><span class="col-monthly-data">1월 2건 · 4월 20건 · 5월 44건 · 6월 212건 · 7월 55건 · 8월 161건</span><span class="col-monthly-tail">2026년</span></div><div class="col-inner" id="paymentFeed" aria-live="polite" aria-atomic="false" aria-relevant="additions"></div>
     </div>
   </div>
 </section>
@@ -1059,11 +1059,11 @@ setTimeout(() => { updateDonut(); }, 600);
 /* ── FEEDS ── */
 const cHist=[
   {team:"HR",co:"A*I*드*이*",cat:"신규",time:"8/31"},
-  {team:"급여",co:"로*커*스*드 강*점",cat:"신규",time:"8/12"},
-  {team:"급여",co:"로*커*스*드 성* 3*점",cat:"신규",time:"8/12"},
+  {team:"HR",co:"신*포*업*동*합",cat:"신규",time:"8/20"},
   {team:"급여",co:"로*커*스*드 을*로*",cat:"신규",time:"8/12"},
   {team:"급여",co:"로*커*스*드*네*버*)",cat:"신규",time:"8/12"},
-  {team:"HR",co:"시*마*팅",cat:"신규",time:"8/4"}
+  {team:"급여",co:"로*커*스*드 성* 3*점",cat:"신규",time:"8/12"},
+  {team:"급여",co:"로*커*스*드 강*점",cat:"신규",time:"8/12"}
 ];
 const cMsgs=['고생하셨습니다!','축하합니다!','멋져요!','수고했어요!','잘했습니다!'];
 function cItem(d,i,isNew){const e=document.createElement('div');e.className='fi';
@@ -1072,16 +1072,16 @@ function cItem(d,i,isNew){const e=document.createElement('div');e.className='fi'
 cHist.forEach((d,i)=>$('contractFeed').appendChild(cItem(d,i)));
 
 const pHist = [
+  {co:'에*텍*스*',amt:2970000,time:'8/14'},
+  {co:'(주)금*정*',amt:1650000,time:'8/14'},
+  {co:'신*경*마*금*',amt:957000,time:'8/14'},
+  {co:'중*효*양*원',amt:495000,time:'8/14'},
+  {co:'금*사*주*간*호*터',amt:396000,time:'8/14'},
+  {co:'태*건*(주)',amt:330000,time:'8/14'},
+  {co:'행*한*가*인*지*터',amt:264000,time:'8/14'},
   {co:'주식회사 씨*엘*설*',amt:220000,time:'8/14'},
-  {co:'평*요*병*',amt:264000,time:'8/13'},
-  {co:'바*온*식*사',amt:649000,time:'8/12'},
-  {co:'주*회*온*',amt:314600,time:'8/12'},
-  {co:'주식회사 해*이*지',amt:275000,time:'8/12'},
-  {co:'주식회사 오*푸*셰*애*',amt:275000,time:'8/12'},
-  {co:'비*종*건*',amt:242000,time:'8/12'},
-  {co:'삼*조*',amt:220000,time:'8/12'},
-  {co:'(주)써*사*드*코*아',amt:220000,time:'8/12'},
-  {co:'이*전*(주)',amt:220000,time:'8/12'}
+  {co:'월*새*을*고',amt:217800,time:'8/14'},
+  {co:'(사)범*처*합*스*어*회',amt:1782800,time:'8/13'}
 ];
 function pItem(d,i,isNew){const e=document.createElement('div');e.className='fi';
   e.innerHTML=`<div class="fi-status" style="background:var(--cyan)"></div><div class="fi-info"><div class="fi-team">${d.co}</div><div class="fi-meta">입금 완료 · ${d.time||'방금'}</div></div>${isNew?'<span class="fi-new">NEW</span>':''}<div class="fi-amt">${fmt(d.amt)}</div>`;
@@ -1111,57 +1111,61 @@ let AI_MVP_DATA = {
   ],
   /* [v8 인사팀] 베스트 사례 — 전일 작성 일지 중 점수 높은 순으로 회전 */
   bestCases: [
-      {name:'김동우',team:'기업지원팀',date:'8/17',title:'[Cowork] Refund vault weekly sync. 주간 스케줄로 노션 4대보험 환급 데이터를 통…',body:'[Cowork] Refund vault weekly sync — 노션 4대보험 환급 관련 DB를 주간 단위로 읽어 개인볼트용 노트 패키지를 생성. 기준선 106건 → 272건(신규 169·제외 3)으로 집계했고, 진행상황·업종·기업규모별 분포까지 정리한 뒤 변동요약과 병합안내 문서를 함께 산출. 다만 기준선 스냅샷에 진행상황 값이 없어 상태변경 비교는 이번 회차 불가로 판정하고 다음 회차 기준을 남김. 노션은 읽기 전용으로만 접근. [Cowork] Gmail auto sort — in:inbox newer_than:2d has:n…',tool:'Claude',score:5}
+      {name:'박진아',team:'경영지원팀',date:'8/14',title:'전월 동기 비교표 미갱신을 검증 장치로 차단',body:'스케줄 지침만으로는 빠뜨려도 화면이 멀쩡해 보이는 허점을 짚어, 전월 비교 구간이 스냅샷일을 따라왔는지와 HTML·PDF 값 일치를 기계적으로 대조해 어긋나면 반영을 중단시키는 verify_prior_month_sync를 신설. 스테일 상태를 재현해 검출까지 확인했고, PDF 라벨이 오늘−1일로 계산되던 숨은 버그도 미리 잡아 8/18 합산 회차 사고를 예방.',tool:'Claude',score:9},
+      {name:'조하늘',team:'기업지원팀',date:'8/14',title:'청년일자리도약장려금 지침을 실무 타임라인으로',body:'2026년 지침 원문을 웹에서 확보해 요건·회수 로직을 문서화한 뒤, 2026.2.11 채용자 기준 후속 질문으로 신청마감·고용조정 제한 시작·수습 인정한도·1~3회차 신청마감 등 5개 파생 기준일을 하나의 타임라인 표로 산출. 원문 확보→문서화→개별 사안 적용으로 이어져 접수 실무에 바로 쓰는 캘린더성 결과물을 도출.',tool:'Claude',score:9},
+      {name:'정보람',team:'기업지원팀',date:'8/14',title:'정보파기확인서, 법 근거 절충안으로 완성',body:'안양새마을금고 정보파기확인서(별표8) — 해임 후에도 최초자료를 계속 보관하면 안되냐는 질문에 노무사법 제17조·국가재정법 제96조·개인정보보호법 제21조를 근거로 해임일로부터 5년 보관 후 파기라는 절충안을 제시하고 확인서 문구까지 완성. 지시→법적 근거 제시→합의된 최종 문구 산출로 이어진 사례.',tool:'Claude',score:7},
+      {name:'김동우',team:'기업지원팀',date:'8/14',title:'라벨분류 자동화가 규칙 개선 백로그까지 제안',body:'Gmail 미분류 132건을 담당자 규칙으로 판정해 35건 라벨 적용, 규칙에 없는 발신자 97건은 억지 배정 없이 의도적으로 보류. 보류 사유를 물량과 함께 집계해 글로싸인 28건 편입 여부 등 규칙 보완 후보 5건을 근거와 함께 제안 — 실행 산출물(35건 라벨)과 스킬 개선 백로그를 동시에 확보.',tool:'Claude',score:5},
+      {name:'조소윤',team:'HR사업본부',date:'8/14',title:'일정 자동 정리로 캘린더 수동 확인 생략',body:'Team schedule alert가 오늘 재택상시 현황 5건과 10:30 HR 지원자 면접 일정을 표로 자동 정리해 캘린더 수동 확인 없이 파악. 실무 시간은 절약했으나 직접 개입한 질의응답이 없어 활용 깊이는 낮았다는 자체 평가.',tool:'Claude',score:2}
     ],
-  bestCaseRangeLabel: '8/17',
+    bestCaseRangeLabel: '8/14',
   /* [v8 인사팀] 팀별 활용 분포 — 이번 달 누적 일지 건수 (내림차순)
      주: 급여파트는 노무관리팀에 합산 (TEAM_ALIAS) */
   weeklyGrid: [
-    {team:'기업지원팀', total:11, avgRate:9, weekEntries:2, daily:[
-      {dateStr:'2026-08-17', used:1, entries:2, rate:9, isFuture:false},
-      {dateStr:'2026-08-18', used:0, entries:0, rate:0, isFuture:true},
-      {dateStr:'2026-08-19', used:0, entries:0, rate:0, isFuture:true},
-      {dateStr:'2026-08-20', used:0, entries:0, rate:0, isFuture:true},
-      {dateStr:'2026-08-21', used:0, entries:0, rate:0, isFuture:true}
+    {team:'기업지원팀', total:11, avgRate:32, weekEntries:25, daily:[
+      {dateStr:'2026-08-10', used:4, entries:7, rate:36, isFuture:false},
+      {dateStr:'2026-08-11', used:4, entries:6, rate:36, isFuture:false},
+      {dateStr:'2026-08-12', used:3, entries:4, rate:27, isFuture:false},
+      {dateStr:'2026-08-13', used:4, entries:4, rate:36, isFuture:false},
+      {dateStr:'2026-08-14', used:3, entries:4, rate:27, isFuture:false}
     ]},
-    {team:'노무관리팀', total:10, avgRate:0, weekEntries:0, daily:[
-      {dateStr:'2026-08-17', used:0, entries:0, rate:0, isFuture:false},
-      {dateStr:'2026-08-18', used:0, entries:0, rate:0, isFuture:true},
-      {dateStr:'2026-08-19', used:0, entries:0, rate:0, isFuture:true},
-      {dateStr:'2026-08-20', used:0, entries:0, rate:0, isFuture:true},
-      {dateStr:'2026-08-21', used:0, entries:0, rate:0, isFuture:true}
+    {team:'노무관리팀', total:10, avgRate:16, weekEntries:12, daily:[
+      {dateStr:'2026-08-10', used:3, entries:3, rate:30, isFuture:false},
+      {dateStr:'2026-08-11', used:1, entries:3, rate:10, isFuture:false},
+      {dateStr:'2026-08-12', used:2, entries:3, rate:20, isFuture:false},
+      {dateStr:'2026-08-13', used:2, entries:2, rate:20, isFuture:false},
+      {dateStr:'2026-08-14', used:0, entries:1, rate:0, isFuture:false}
     ]},
-    {team:'HR사업본부', total:8, avgRate:0, weekEntries:0, daily:[
-      {dateStr:'2026-08-17', used:0, entries:0, rate:0, isFuture:false},
-      {dateStr:'2026-08-18', used:0, entries:0, rate:0, isFuture:true},
-      {dateStr:'2026-08-19', used:0, entries:0, rate:0, isFuture:true},
-      {dateStr:'2026-08-20', used:0, entries:0, rate:0, isFuture:true},
-      {dateStr:'2026-08-21', used:0, entries:0, rate:0, isFuture:true}
+    {team:'HR사업본부', total:8, avgRate:23, weekEntries:17, daily:[
+      {dateStr:'2026-08-10', used:1, entries:3, rate:13, isFuture:false},
+      {dateStr:'2026-08-11', used:3, entries:4, rate:38, isFuture:false},
+      {dateStr:'2026-08-12', used:0, entries:2, rate:0, isFuture:false},
+      {dateStr:'2026-08-13', used:4, entries:5, rate:50, isFuture:false},
+      {dateStr:'2026-08-14', used:1, entries:3, rate:13, isFuture:false}
     ]},
-    {team:'경영지원팀', total:3, avgRate:0, weekEntries:0, daily:[
-      {dateStr:'2026-08-17', used:0, entries:0, rate:0, isFuture:false},
-      {dateStr:'2026-08-18', used:0, entries:0, rate:0, isFuture:true},
-      {dateStr:'2026-08-19', used:0, entries:0, rate:0, isFuture:true},
-      {dateStr:'2026-08-20', used:0, entries:0, rate:0, isFuture:true},
-      {dateStr:'2026-08-21', used:0, entries:0, rate:0, isFuture:true}
+    {team:'경영지원팀', total:3, avgRate:60, weekEntries:11, daily:[
+      {dateStr:'2026-08-10', used:2, entries:2, rate:67, isFuture:false},
+      {dateStr:'2026-08-11', used:2, entries:3, rate:67, isFuture:false},
+      {dateStr:'2026-08-12', used:2, entries:3, rate:67, isFuture:false},
+      {dateStr:'2026-08-13', used:2, entries:2, rate:67, isFuture:false},
+      {dateStr:'2026-08-14', used:1, entries:1, rate:33, isFuture:false}
     ]},
     {team:'대외협력팀', total:3, avgRate:0, weekEntries:0, daily:[
-      {dateStr:'2026-08-17', used:0, entries:0, rate:0, isFuture:false},
-      {dateStr:'2026-08-18', used:0, entries:0, rate:0, isFuture:true},
-      {dateStr:'2026-08-19', used:0, entries:0, rate:0, isFuture:true},
-      {dateStr:'2026-08-20', used:0, entries:0, rate:0, isFuture:true},
-      {dateStr:'2026-08-21', used:0, entries:0, rate:0, isFuture:true}
+      {dateStr:'2026-08-10', used:0, entries:0, rate:0, isFuture:false},
+      {dateStr:'2026-08-11', used:0, entries:0, rate:0, isFuture:false},
+      {dateStr:'2026-08-12', used:0, entries:0, rate:0, isFuture:false},
+      {dateStr:'2026-08-13', used:0, entries:0, rate:0, isFuture:false},
+      {dateStr:'2026-08-14', used:0, entries:0, rate:0, isFuture:false}
     ]},
-    {team:'기금팀', total:1, avgRate:0, weekEntries:0, daily:[
-      {dateStr:'2026-08-17', used:0, entries:0, rate:0, isFuture:false},
-      {dateStr:'2026-08-18', used:0, entries:0, rate:0, isFuture:true},
-      {dateStr:'2026-08-19', used:0, entries:0, rate:0, isFuture:true},
-      {dateStr:'2026-08-20', used:0, entries:0, rate:0, isFuture:true},
-      {dateStr:'2026-08-21', used:0, entries:0, rate:0, isFuture:true}
+    {team:'기금팀', total:1, avgRate:20, weekEntries:1, daily:[
+      {dateStr:'2026-08-10', used:1, entries:1, rate:100, isFuture:false},
+      {dateStr:'2026-08-11', used:0, entries:0, rate:0, isFuture:false},
+      {dateStr:'2026-08-12', used:0, entries:0, rate:0, isFuture:false},
+      {dateStr:'2026-08-13', used:0, entries:0, rate:0, isFuture:false},
+      {dateStr:'2026-08-14', used:0, entries:0, rate:0, isFuture:false}
     ]}
   ],
   /* [v41] weeklyGrid와 함께 항상 갱신 — 없으면 Sheets 동기화 시 v40 보존 로직이 무력화됨 */
-  weekDates: ['2026-08-17','2026-08-18','2026-08-19','2026-08-20','2026-08-21']
+  weekDates: ['2026-08-10','2026-08-11','2026-08-12','2026-08-13','2026-08-14']
 };
 /* === AI_CHAMPION_DATA_END === */
 
@@ -3019,7 +3023,7 @@ const newC=[{team:'자문팀',cat:'노동사건'},{team:'건설팀',cat:'건설�
 const newP=[{co:'(주)강동엔지니어링',amt:3300000},{co:'에스원월드',amt:1100000},
   {co:'머니무브(주)',amt:2200000},{co:'정형외과의원',amt:220000},
   {co:'마틸다네일샵',amt:2200000},{co:'거산테크',amt:550000}];
-let ci=0,pi=0,ctT=6,pmT=38,leadN=14,srcN=8,srcG=4,srcB=2,cnTotal=14,cnToday=5;
+let ci=0,pi=0,ctT=10,pmT=161,leadN=14,srcN=8,srcG=4,srcB=2,cnTotal=14,cnToday=5;
 function now(){return new Date().toTimeString().slice(0,5);}
 
 function pushContract(){const d=newC[ci%newC.length];ci++;d.time=now();const prev=ctT;ctT++;
