@@ -852,10 +852,10 @@ body{background:var(--bg);color:var(--text-primary);font-family:'Pretendard Vari
 <section class="card contract-card live-row" id="cardDual" aria-label="계약 체결 및 입금 완료 실시간 피드" style="grid-row:3;grid-column:1/3;">
   <div class="dual-feed">
     <div class="dual-col">
-      <div class="col-hdr"><div class="col-dot" style="background:var(--toss)"></div><div class="col-title"><span class="period-tag live">LIVE</span><span class="period-tag today" style="margin-left:4px;font-size:10px;opacity:.85">이번 달</span><span class="col-ico" aria-hidden="true">✍️</span> 계약 체결 라이브</div><div class="col-cnt" id="ctTotal">10</div><div class="col-u">건</div></div><div class="col-monthly" data-card="contract"><span class="col-monthly-data">1월 4건 · 2월 7건 · 3월 6건 · 4월 15건 · 5월 4건 · 6월 9건 · 7월 2건 · 8월 10건</span><span class="col-monthly-tail">2026년</span></div><div class="col-inner" id="contractFeed" aria-live="polite" aria-atomic="false" aria-relevant="additions"></div>
+      <div class="col-hdr"><div class="col-dot" style="background:var(--toss)"></div><div class="col-title"><span class="period-tag live">LIVE</span><span class="period-tag today" style="margin-left:4px;font-size:10px;opacity:.85">이번 달</span><span class="col-ico" aria-hidden="true">✍️</span> 계약 체결 라이브</div><div class="col-cnt" id="ctTotal">14</div><div class="col-u">건</div></div><div class="col-monthly" data-card="contract"><span class="col-monthly-data">1월 4건 · 2월 7건 · 3월 6건 · 4월 15건 · 5월 4건 · 6월 9건 · 7월 2건 · 8월 14건</span><span class="col-monthly-tail">2026년</span></div><div class="col-inner" id="contractFeed" aria-live="polite" aria-atomic="false" aria-relevant="additions"></div>
     </div>
     <div class="dual-col">
-      <div class="col-hdr"><div class="col-dot" style="background:var(--cyan)"></div><div class="col-title"><span class="period-tag live">LIVE</span><span class="period-tag today" style="margin-left:4px;font-size:10px;opacity:.85">이번 달</span><span class="col-ico" aria-hidden="true">💰</span> 입금 완료 라이브</div><div class="col-cnt" id="pmTotal">161</div><div class="col-u">건</div></div><div class="col-monthly" data-card="payment"><span class="col-monthly-data">1월 2건 · 4월 20건 · 5월 44건 · 6월 212건 · 7월 55건 · 8월 161건</span><span class="col-monthly-tail">2026년</span></div><div class="col-inner" id="paymentFeed" aria-live="polite" aria-atomic="false" aria-relevant="additions"></div>
+      <div class="col-hdr"><div class="col-dot" style="background:var(--cyan)"></div><div class="col-title"><span class="period-tag live">LIVE</span><span class="period-tag today" style="margin-left:4px;font-size:10px;opacity:.85">이번 달</span><span class="col-ico" aria-hidden="true">💰</span> 입금 완료 라이브</div><div class="col-cnt" id="pmTotal">162</div><div class="col-u">건</div></div><div class="col-monthly" data-card="payment"><span class="col-monthly-data">1월 2건 · 4월 20건 · 5월 44건 · 6월 212건 · 7월 57건 · 8월 162건</span><span class="col-monthly-tail">2026년</span></div><div class="col-inner" id="paymentFeed" aria-live="polite" aria-atomic="false" aria-relevant="additions"></div>
     </div>
   </div>
 </section>
@@ -1060,10 +1060,10 @@ setTimeout(() => { updateDonut(); }, 600);
 const cHist=[
   {team:"HR",co:"A*I*드*이*",cat:"신규",time:"8/31"},
   {team:"HR",co:"신*포*업*동*합",cat:"신규",time:"8/20"},
-  {team:"급여",co:"로*커*스*드 을*로*",cat:"신규",time:"8/12"},
-  {team:"급여",co:"로*커*스*드*네*버*)",cat:"신규",time:"8/12"},
-  {team:"급여",co:"로*커*스*드 성* 3*점",cat:"신규",time:"8/12"},
-  {team:"급여",co:"로*커*스*드 강*점",cat:"신규",time:"8/12"}
+  {team:"급여",co:"우*포 명*점",cat:"신규",time:"8/19"},
+  {team:"급여",co:"보*반* 명*점",cat:"신규",time:"8/19"},
+  {team:"급여",co:"효*동 솥*껑*겹* 명*1*점",cat:"신규",time:"8/19"},
+  {team:"급여",co:"엘*스*(*백*잠*점*",cat:"신규",time:"8/19"}
 ];
 const cMsgs=['고생하셨습니다!','축하합니다!','멋져요!','수고했어요!','잘했습니다!'];
 function cItem(d,i,isNew){const e=document.createElement('div');e.className='fi';
@@ -1072,6 +1072,7 @@ function cItem(d,i,isNew){const e=document.createElement('div');e.className='fi'
 cHist.forEach((d,i)=>$('contractFeed').appendChild(cItem(d,i)));
 
 const pHist = [
+  {co:'스*트*앙*설',amt:550000,time:'8/19'},
   {co:'에*텍*스*',amt:2970000,time:'8/14'},
   {co:'(주)금*정*',amt:1650000,time:'8/14'},
   {co:'신*경*마*금*',amt:957000,time:'8/14'},
@@ -1080,8 +1081,7 @@ const pHist = [
   {co:'태*건*(주)',amt:330000,time:'8/14'},
   {co:'행*한*가*인*지*터',amt:264000,time:'8/14'},
   {co:'주식회사 씨*엘*설*',amt:220000,time:'8/14'},
-  {co:'월*새*을*고',amt:217800,time:'8/14'},
-  {co:'(사)범*처*합*스*어*회',amt:1782800,time:'8/13'}
+  {co:'월*새*을*고',amt:217800,time:'8/14'}
 ];
 function pItem(d,i,isNew){const e=document.createElement('div');e.className='fi';
   e.innerHTML=`<div class="fi-status" style="background:var(--cyan)"></div><div class="fi-info"><div class="fi-team">${d.co}</div><div class="fi-meta">입금 완료 · ${d.time||'방금'}</div></div>${isNew?'<span class="fi-new">NEW</span>':''}<div class="fi-amt">${fmt(d.amt)}</div>`;
@@ -1122,10 +1122,10 @@ let AI_MVP_DATA = {
   /* [v8 인사팀] 팀별 활용 분포 — 이번 달 누적 일지 건수 (내림차순)
      주: 급여파트는 노무관리팀에 합산 (TEAM_ALIAS) */
   weeklyGrid: [
-    {team:'기업지원팀', total:11, avgRate:18, weekEntries:11, daily:[
+    {team:'기업지원팀', total:11, avgRate:18, weekEntries:12, daily:[
       {dateStr:'2026-08-17', used:1, entries:2, rate:9, isFuture:false},
       {dateStr:'2026-08-18', used:3, entries:6, rate:27, isFuture:false},
-      {dateStr:'2026-08-19', used:2, entries:3, rate:18, isFuture:false},
+      {dateStr:'2026-08-19', used:2, entries:4, rate:18, isFuture:false},
       {dateStr:'2026-08-20', used:0, entries:0, rate:0, isFuture:true},
       {dateStr:'2026-08-21', used:0, entries:0, rate:0, isFuture:true}
     ]},
@@ -3024,7 +3024,7 @@ const newC=[{team:'자문팀',cat:'노동사건'},{team:'건설팀',cat:'건설�
 const newP=[{co:'(주)강동엔지니어링',amt:3300000},{co:'에스원월드',amt:1100000},
   {co:'머니무브(주)',amt:2200000},{co:'정형외과의원',amt:220000},
   {co:'마틸다네일샵',amt:2200000},{co:'거산테크',amt:550000}];
-let ci=0,pi=0,ctT=10,pmT=161,leadN=14,srcN=8,srcG=4,srcB=2,cnTotal=14,cnToday=5;
+let ci=0,pi=0,ctT=14,pmT=162,leadN=14,srcN=8,srcG=4,srcB=2,cnTotal=14,cnToday=5;
 function now(){return new Date().toTimeString().slice(0,5);}
 
 function pushContract(){const d=newC[ci%newC.length];ci++;d.time=now();const prev=ctT;ctT++;
