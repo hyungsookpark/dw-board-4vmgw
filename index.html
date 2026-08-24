@@ -855,7 +855,7 @@ body{background:var(--bg);color:var(--text-primary);font-family:'Pretendard Vari
       <div class="col-hdr"><div class="col-dot" style="background:var(--toss)"></div><div class="col-title"><span class="period-tag live">LIVE</span><span class="period-tag today" style="margin-left:4px;font-size:10px;opacity:.85">이번 달</span><span class="col-ico" aria-hidden="true">✍️</span> 계약 체결 라이브</div><div class="col-cnt" id="ctTotal">15</div><div class="col-u">건</div></div><div class="col-monthly" data-card="contract"><span class="col-monthly-data">1월 4건 · 2월 7건 · 3월 6건 · 4월 15건 · 5월 4건 · 6월 9건 · 7월 2건 · 8월 15건</span><span class="col-monthly-tail">2026년</span></div><div class="col-inner" id="contractFeed" aria-live="polite" aria-atomic="false" aria-relevant="additions"></div>
     </div>
     <div class="dual-col">
-      <div class="col-hdr"><div class="col-dot" style="background:var(--cyan)"></div><div class="col-title"><span class="period-tag live">LIVE</span><span class="period-tag today" style="margin-left:4px;font-size:10px;opacity:.85">이번 달</span><span class="col-ico" aria-hidden="true">💰</span> 입금 완료 라이브</div><div class="col-cnt" id="pmTotal">162</div><div class="col-u">건</div></div><div class="col-monthly" data-card="payment"><span class="col-monthly-data">1월 2건 · 4월 20건 · 5월 44건 · 6월 212건 · 7월 57건 · 8월 162건</span><span class="col-monthly-tail">2026년</span></div><div class="col-inner" id="paymentFeed" aria-live="polite" aria-atomic="false" aria-relevant="additions"></div>
+      <div class="col-hdr"><div class="col-dot" style="background:var(--cyan)"></div><div class="col-title"><span class="period-tag live">LIVE</span><span class="period-tag today" style="margin-left:4px;font-size:10px;opacity:.85">이번 달</span><span class="col-ico" aria-hidden="true">💰</span> 입금 완료 라이브</div><div class="col-cnt" id="pmTotal">167</div><div class="col-u">건</div></div><div class="col-monthly" data-card="payment"><span class="col-monthly-data">1월 2건 · 4월 20건 · 5월 44건 · 6월 212건 · 7월 57건 · 8월 167건</span><span class="col-monthly-tail">2026년</span></div><div class="col-inner" id="paymentFeed" aria-live="polite" aria-atomic="false" aria-relevant="additions"></div>
     </div>
   </div>
 </section>
@@ -1073,16 +1073,16 @@ function cItem(d,i,isNew){const e=document.createElement('div');e.className='fi'
 cHist.forEach((d,i)=>$('contractFeed').appendChild(cItem(d,i)));
 
 const pHist = [
+  {co:'주*회*민*크',amt:275000,time:'8/20'},
+  {co:'청*이*지',amt:198000,time:'8/20'},
+  {co:'(주)맥*에*지*루*',amt:132000,time:'8/20'},
+  {co:'한*일*트*',amt:110000,time:'8/20'},
   {co:'스*트*앙*설',amt:550000,time:'8/19'},
   {co:'에*텍*스*',amt:2970000,time:'8/14'},
   {co:'(주)금*정*',amt:1650000,time:'8/14'},
   {co:'신*경*마*금*',amt:957000,time:'8/14'},
   {co:'중*효*양*원',amt:495000,time:'8/14'},
-  {co:'금*사*주*간*호*터',amt:396000,time:'8/14'},
-  {co:'태*건*(주)',amt:330000,time:'8/14'},
-  {co:'행*한*가*인*지*터',amt:264000,time:'8/14'},
-  {co:'주식회사 씨*엘*설*',amt:220000,time:'8/14'},
-  {co:'월*새*을*고',amt:217800,time:'8/14'}
+  {co:'금*사*주*간*호*터',amt:396000,time:'8/14'}
 ];
 function pItem(d,i,isNew){const e=document.createElement('div');e.className='fi';
   e.innerHTML=`<div class="fi-status" style="background:var(--cyan)"></div><div class="fi-info"><div class="fi-team">${d.co}</div><div class="fi-meta">입금 완료 · ${d.time||'방금'}</div></div>${isNew?'<span class="fi-new">NEW</span>':''}<div class="fi-amt">${fmt(d.amt)}</div>`;
@@ -1113,22 +1113,22 @@ let AI_MVP_DATA = {
   /* [v8 인사팀] 베스트 사례 — 전일 작성 일지 중 점수 높은 순으로 회전 */
   bestCases: [
       {name:'허혜진',team:'노무관리팀',date:'8/21',title:'4대보험 공제 교차검증에서 국민연금 칸에 근로자기여금이 아닌 연금보험료 총액이 들어가 2배 공제된 건과, 장…',body:'① 공단 국민연금·건강보험 고지내역(xlsx)을 급여대장(작업).xlsb 고지내역 시트에 원본 순서대로 일괄 전사(9개 사업장 반복, 검증됨). ② 수당 세후 지정액을 지급 총액으로 그로스업 역산(이분탐색, 스킨엑스). ③ 공단 고지내역↔급여대장 4대보험 공제 교차검증 — 국민연금 이중공제(근로자기여금 대신 연금보험료 총액 입력)·장기요양 수식 IFNA 누락으로 #N/A 발생 건 적발. ④ 상여·성과금·직급수당을 인건비보고서 tbl급여변동 테이블에 입력해 대장 반영(대장 칸이 XLOOKUP 수식이므로). (출처: 급여파트 AI 활용…',tool:'Claude',score:9},
-      {name:'김동우',team:'기업지원팀',date:'8/21',title:'[Cowork] Gmail auto sort. 130여 스레드를 규칙 기반으로 자동 라벨링하면서, 규칙에 명…',body:'[Cowork] Gmail 자동 분류(Gmail auto sort): 최근 2일 이내 무라벨 메일 약 130여 스레드(3페이지)를 스캔해 담당자·부서 라벨링 규칙에 따라 자동 분류. 수임료 19건, 대외협력팀 15건, 4대보험 환급 노무사 3건, 담당자별(곽대영 9/박유경 8/길경찬 11 등) 배분, 중복 6건 제외, 미분류 약 46건. 규칙에 없는 애매한 케이스(정보람 매니저 서명, psa@ 발신 대외협력팀 유사 메일, notify@mail.notion.com 도메인 불일치 등)는 임의 처리 대신 별도 보고. [Cowork] G…',tool:'Claude',score:5},
       {name:'박진아',team:'경영지원팀',date:'8/21',title:'대시보드 회차에서 신한카드 스크래핑 복구분(44건) 소급 반영과 전월 동기 비교기준 재정합을 한 번에 처리해…',body:'① 매출/자금 대시보드 8/20(목) 회차 갱신(daily-sales-fund-dashboard, 완료) — 자금 순유입 +4,683,420원(입금 8,933,400 / 출금 4,249,980), 가용자금 135,182,754원, 런웨이 0.5개월. 8월 누적 매출(박진엽 제외) 125건·131,079,153원(8/20 발행 27건 9,269,509 + 소급정정 5건 +11,245,091). 8/14부터 FATAL이던 신한카드(306) 승인 스크래핑 복구를 반영해 8/1~8/19 카드이용 584→628건 소급 보완(8월 누적 678…',tool:'Claude',score:5},
       {name:'박형숙',team:'경영지원팀',date:'8/21',title:'짧은 요청 한 번으로 일지 업로드→대시보드 집계→베스트 사례 반영까지 연쇄적으로 처리된 것',body:'1. 전일 AI 활용일지 초안 검토·승인 — 자동 생성된 초안을 확인 후 노션 AI활용일지 DB에 업로드하고 담당자 멘션 코멘트까지 자동 등록 2. 본인 일지의 대시보드 수동 반영 요청 — "지금 올렸어, 추가해줘" 한 마디로 팀별 활용률·베스트 사례에 즉시 반영 (무결성 검증·백업 포함) 3. 도원 대시보드 일일 자동 동기화 (자동화 2회 실행) — 전일 활용일지 15건 팀별 집계, 계약체결 신규 1건 델타 반영, 뒤늦게 입력된 전월 입금 건은 중복 가산 방지를 위해 보고만 처리 4. AI 활용일지 베스트 사례 자동 선별 (자동화…',tool:'Claude',score:5},
+      {name:'김동우',team:'기업지원팀',date:'8/21',title:'[Cowork] Gmail auto sort. 130여 스레드를 규칙 기반으로 자동 라벨링하면서, 규칙에 명…',body:'[Cowork] Gmail 자동 분류(Gmail auto sort): 최근 2일 이내 무라벨 메일 약 130여 스레드(3페이지)를 스캔해 담당자·부서 라벨링 규칙에 따라 자동 분류. 수임료 19건, 대외협력팀 15건, 4대보험 환급 노무사 3건, 담당자별(곽대영 9/박유경 8/길경찬 11 등) 배분, 중복 6건 제외, 미분류 약 46건. 규칙에 없는 애매한 케이스(정보람 매니저 서명, psa@ 발신 대외협력팀 유사 메일, notify@mail.notion.com 도메인 불일치 등)는 임의 처리 대신 별도 보고. [Cowork] G…',tool:'Claude',score:5},
       {name:'정보람',team:'기업지원팀',date:'8/21',title:'[추측] (주)거성유리산업·김소강치과의원 청일도 대상자 확인 자료요청 메일이 mail-draft-genera…',body:'[불확실] 오늘 코워크 세션 로그에서 확인되는 것은 예약 자동화(일일 활용일지 등) 실행 기록뿐이며, 정보람이 직접 진행한 일반 채팅 세션은 session_info에 노출되지 않아 확인이 불가함. [추측] 업무일지(Notion) 기준 (주)거성유리산업·김소강치과의원 청일도 대상자 확인 자료요청 등 반복 행정 메일 업무는 설치된 mail-draft-generator·gmail-target-table 스킬의 용도와 일치해 Claude로 처리했을 가능성이 있으나, 세션으로 직접 확인되지는 않음. ※ 본 일지는 코워크 세션 + Notion…',tool:'Claude',score:4},
       {name:'길경찬',team:'기업지원팀',date:'8/21',title:'[사실] 사용자 주도 대화가 없어 \'가장 잘 쓴 순간\'으로 꼽을 대화가 없습니다. [의견] 굳이 꼽으면 kk…',body:'[사실] 2026-08-21 세션은 총 2건이며 모두 스케줄 자동실행분입니다. ① kkc-daily-work-journal(09:08 KST) — 직전 영업일 2026-08-20 활동을 길경찬프로 업무일지 DB에 13건 생성(연락일지 1 / 자료요청 6 — 성원섬유·대성타운·가제트병원·(주)대운·양정분산부인과·금빛사랑주야간보호센터 / 접수 2 — 로지스올에코텍 청년일자리도약장려금 1,800,000원, 대성타운 출산육아기고용안정장려금 1,200,000원 / 통화기록 4). ② ai----1000(10:07 KST) — 08-19~08…',tool:'Claude',score:0}
     ],
-  bestCaseRangeLabel: '8/21',
+    bestCaseRangeLabel: '8/21',
   /* [v8 인사팀] 팀별 활용 분포 — 이번 달 누적 일지 건수 (내림차순)
      주: 급여파트는 노무관리팀에 합산 (TEAM_ALIAS) */
   weeklyGrid: [
-    {team:'기업지원팀', total:11, avgRate:23, weekEntries:23, daily:[
+    {team:'기업지원팀', total:11, avgRate:23, weekEntries:24, daily:[
       {dateStr:'2026-08-17', used:1, entries:2, rate:9, isFuture:false},
       {dateStr:'2026-08-18', used:4, entries:7, rate:36, isFuture:false},
       {dateStr:'2026-08-19', used:2, entries:4, rate:18, isFuture:false},
       {dateStr:'2026-08-20', used:3, entries:5, rate:27, isFuture:false},
-      {dateStr:'2026-08-21', used:3, entries:5, rate:27, isFuture:false}
+      {dateStr:'2026-08-21', used:3, entries:6, rate:27, isFuture:false}
     ]},
     {team:'노무관리팀', total:10, avgRate:12, weekEntries:9, daily:[
       {dateStr:'2026-08-17', used:0, entries:0, rate:0, isFuture:false},
@@ -3025,7 +3025,7 @@ const newC=[{team:'자문팀',cat:'노동사건'},{team:'건설팀',cat:'건설�
 const newP=[{co:'(주)강동엔지니어링',amt:3300000},{co:'에스원월드',amt:1100000},
   {co:'머니무브(주)',amt:2200000},{co:'정형외과의원',amt:220000},
   {co:'마틸다네일샵',amt:2200000},{co:'거산테크',amt:550000}];
-let ci=0,pi=0,ctT=14,pmT=162,leadN=14,srcN=8,srcG=4,srcB=2,cnTotal=14,cnToday=5;
+let ci=0,pi=0,ctT=15,pmT=167,leadN=14,srcN=8,srcG=4,srcB=2,cnTotal=14,cnToday=5;
 function now(){return new Date().toTimeString().slice(0,5);}
 
 function pushContract(){const d=newC[ci%newC.length];ci++;d.time=now();const prev=ctT;ctT++;
