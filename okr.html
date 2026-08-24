@@ -1,0 +1,997 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>도원 OKR 보드</title>
+</head>
+<body>
+
+<style>
+:root{
+  --navy:#0e2050; --navy-2:#16307a; --blue:#2a78d6; --blue-soft:#eaf2fc;
+  --bg:#f6f7fa; --card:#ffffff; --line:rgba(14,32,80,.10); --line-soft:rgba(14,32,80,.06);
+  --ink:#14161c; --ink-2:#4b5164; --muted:#8a8f9f;
+  --t1:#2a78d6; --t2:#eb6834; --t3:#1baf7a; --t4:#eda100; --t5:#e87ba4;
+  --good:#0ca30c; --warn:#fab219; --serious:#ec835a; --crit:#d03b3b;
+  --track:#eef1f6;
+  --r:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:"Pretendard Variable",Pretendard,system-ui,-apple-system,"Segoe UI","Malgun Gothic",sans-serif;background:var(--bg);color:var(--ink);line-height:1.55;font-size:14.5px}
+button{font-family:inherit;cursor:pointer}
+input{font-family:inherit}
+
+/* ===== header ===== */
+.hdr{background:linear-gradient(135deg,#0b1a42 0%,#132a66 70%,#1a3a8c 100%);color:#fff;padding:26px 28px 0}
+.hdr-in{max-width:1180px;margin:0 auto}
+.hdr .kicker{font-size:11.5px;letter-spacing:.14em;color:#9db4e8;font-weight:600;text-transform:uppercase}
+.hdr h1{font-size:25px;font-weight:800;margin-top:6px;letter-spacing:-.01em}
+.hdr .sub{color:#b9c8ec;font-size:13px;margin-top:6px}
+.hdr-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.chip{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:5px 13px;font-size:12.5px;color:#e6ecfb}
+.chip b{color:#fff;font-weight:700}
+.tabs{max-width:1180px;margin:20px auto 0;display:flex;gap:4px;overflow-x:auto}
+.tab{background:transparent;border:none;color:#a9bbe6;font-size:14px;font-weight:600;padding:11px 16px;border-radius:10px 10px 0 0;white-space:nowrap}
+.tab:hover{color:#fff;background:rgba(255,255,255,.07)}
+.tab.on{background:var(--bg);color:var(--navy);font-weight:700}
+
+/* ===== layout ===== */
+main{max-width:1180px;margin:0 auto;padding:26px 28px 60px}
+section{display:none}
+section.on{display:block}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g5{grid-template-columns:repeat(5,1fr)}
+@media(max-width:900px){.g3,.g5{grid-template-columns:repeat(2,1fr)}.g2{grid-template-columns:1fr}}
+@media(max-width:600px){.g3,.g5{grid-template-columns:1fr}main{padding:20px 16px 60px}.hdr{padding:22px 16px 0}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px}
+.card h3{font-size:15.5px;font-weight:700;color:var(--navy)}
+.sec-t{font-size:17px;font-weight:800;color:var(--navy);margin:30px 0 4px;letter-spacing:-.01em}
+.sec-t:first-child{margin-top:0}
+.sec-d{color:var(--ink-2);font-size:13.5px;margin-bottom:14px}
+.mut{color:var(--muted)}
+.small{font-size:12.5px}
+
+/* ===== home ===== */
+.hero{display:grid;grid-template-columns:300px 1fr;gap:14px}
+@media(max-width:900px){.hero{grid-template-columns:1fr}}
+.hero-num .lbl{font-size:12.5px;font-weight:600;color:var(--ink-2)}
+.hero-num .val{font-size:42px;font-weight:800;color:var(--navy);letter-spacing:-.02em;line-height:1.1;margin-top:6px}
+.hero-num .unit{font-size:20px;font-weight:700;color:var(--ink-2)}
+.hero-num .note{font-size:12.5px;color:var(--muted);margin-top:8px}
+.stack{margin-top:14px}
+.stack-bar{display:flex;height:26px;border-radius:6px;overflow:hidden;gap:2px}
+.stack-bar div{border-radius:4px}
+.stack-leg{display:flex;flex-wrap:wrap;gap:14px;margin-top:10px;font-size:12.5px;color:var(--ink-2)}
+.dot{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.obj-card{border-top:3px solid var(--blue)}
+.obj-card .code{font-size:11px;font-weight:700;color:var(--blue);letter-spacing:.08em}
+.obj-card h4{font-size:14.5px;font-weight:700;color:var(--navy);margin:4px 0 6px}
+.obj-card p{font-size:12.5px;color:var(--ink-2)}
+.tbar-row{display:grid;grid-template-columns:92px 1fr 74px;align-items:center;gap:10px;margin-top:10px}
+.tbar-row .nm{font-size:13px;font-weight:600;color:var(--ink)}
+.tbar-track{height:14px;background:var(--track);border-radius:5px;overflow:hidden}
+.tbar-fill{height:100%;border-radius:4px}
+.tbar-row .v{font-size:12.5px;font-weight:700;color:var(--ink-2);text-align:right;font-variant-numeric:tabular-nums}
+.diag{display:grid;grid-template-columns:1fr 22px 1fr;align-items:center;gap:8px;padding:11px 0;border-bottom:1px solid var(--line-soft);font-size:13px}
+.diag:last-child{border-bottom:none}
+.diag .from{color:var(--ink-2)}
+.diag .to{font-weight:600;color:var(--navy)}
+.diag .arr{color:var(--blue);font-weight:700;text-align:center}
+.decide{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line-soft)}
+.decide:last-child{border-bottom:none}
+.decide .n{flex:0 0 22px;height:22px;border-radius:50%;background:var(--navy);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.decide p{font-size:13px;color:var(--ink-2)}
+.decide b{color:var(--ink)}
+
+/* ===== teams ===== */
+.tsel{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.tbtn{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:8px 16px;font-size:13.5px;font-weight:600;color:var(--ink-2)}
+.tbtn .dot{margin-right:6px}
+.tbtn.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.team-head{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:baseline}
+.team-head .nm{font-size:20px;font-weight:800;color:var(--navy)}
+.team-head .meta{font-size:13px;color:var(--ink-2)}
+.badge{display:inline-block;border-radius:6px;padding:2.5px 9px;font-size:11.5px;font-weight:700}
+.badge.type{background:var(--blue-soft);color:#1c5cab}
+.badge.goal{background:var(--navy);color:#fff}
+.mission{margin-top:10px;font-size:14px;color:var(--ink-2)}
+.mission b{color:var(--ink)}
+.csf-card{margin-top:14px}
+.csf-tag{display:inline-block;background:var(--navy);color:#fff;border-radius:6px;font-size:11.5px;font-weight:700;padding:3px 9px}
+.csf-card h4{font-size:15.5px;font-weight:700;color:var(--ink);margin:9px 0 4px;letter-spacing:-.005em}
+.csf-meas{font-size:13px;color:var(--blue);font-weight:600}
+.crit4{display:grid;grid-template-columns:repeat(2,1fr);gap:7px 18px;margin-top:13px;padding-top:13px;border-top:1px solid var(--line-soft)}
+@media(max-width:600px){.crit4{grid-template-columns:1fr}}
+.crit4 div{font-size:12.5px;color:var(--ink-2)}
+.crit4 b{color:var(--navy);font-weight:700;margin-right:6px}
+
+/* ===== align map ===== */
+.amap-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--card)}
+table.amap{border-collapse:collapse;width:100%;min-width:860px;font-size:13px}
+.amap th{background:var(--navy);color:#fff;font-weight:700;padding:12px 12px;text-align:left;font-size:12.5px}
+.amap th .s{display:block;font-weight:400;color:#a9bbe6;font-size:11px}
+.amap td{border-top:1px solid var(--line-soft);padding:13px 12px;vertical-align:middle;color:var(--ink-2)}
+.amap td.rowh{font-weight:700;color:var(--navy);white-space:nowrap}
+.amap td.rowh .s{display:block;font-weight:500;color:var(--muted);font-size:11.5px}
+.amap td.empty{background:repeating-linear-gradient(45deg,#f7f8fb 0 6px,#eef0f5 6px 12px);color:var(--muted);text-align:center}
+.amap td.ind{color:var(--muted);font-style:italic;text-align:center}
+.issue{border-left:4px solid var(--serious);}
+.issue.gap{border-left-color:var(--warn)}
+.issue h4{font-size:14.5px;font-weight:700;color:var(--navy);margin-bottom:6px}
+.issue p{font-size:13px;color:var(--ink-2)}
+.legend-inline{display:flex;gap:18px;margin:10px 2px 0;font-size:12px;color:var(--muted)}
+.sw{display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-3px;margin-right:5px;border:1px solid var(--line)}
+.sw.empty{background:repeating-linear-gradient(45deg,#f7f8fb 0 4px,#eef0f5 4px 8px)}
+
+/* ===== tracking ===== */
+.track-tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px}
+.tool-btn{border:1px solid var(--line);background:var(--card);border-radius:9px;padding:7px 13px;font-size:12.5px;font-weight:600;color:var(--ink-2)}
+.tool-btn:hover{border-color:var(--blue);color:var(--blue)}
+.save-note{font-size:12px;color:var(--muted);margin-left:auto}
+.sumline{display:grid;grid-template-columns:110px 1fr 120px;align-items:center;gap:10px;padding:7px 0}
+.sumline .nm{font-size:13px;font-weight:600}
+.sumline .v{font-size:12.5px;font-weight:700;text-align:right;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.kr-table{width:100%;border-collapse:collapse;margin-top:6px}
+.kr-table th{font-size:11.5px;color:var(--muted);font-weight:600;text-align:left;padding:7px 8px;border-bottom:1px solid var(--line-soft)}
+.kr-table td{padding:8px 8px;border-bottom:1px solid var(--line-soft);font-size:13px;vertical-align:middle}
+.kr-table tr:last-child td{border-bottom:none}
+.lay{display:inline-block;min-width:52px;text-align:center;border-radius:6px;font-size:10.5px;font-weight:700;padding:2.5px 7px}
+.lay.A{background:#f1f3f8;color:var(--ink-2)}
+.lay.O{background:var(--blue-soft);color:#1c5cab}
+.lay.K{background:var(--navy);color:#fff}
+.kr-name{color:var(--ink)}
+.kr-name .u{color:var(--muted);font-size:11.5px;margin-left:4px}
+.num-in{width:82px;border:1px solid var(--line);border-radius:8px;padding:6px 8px;font-size:13px;text-align:right;background:#fbfcfe;font-variant-numeric:tabular-nums}
+.num-in:focus{outline:2px solid var(--blue);outline-offset:-1px;background:#fff}
+.pcell{min-width:150px}
+.pbar{display:flex;align-items:center;gap:8px}
+.ptrack{flex:1;height:9px;background:var(--track);border-radius:4px;overflow:hidden}
+.pfill{height:100%;border-radius:4px;background:var(--blue);transition:width .25s}
+.pnum{font-size:12px;font-weight:700;min-width:38px;text-align:right;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.howto{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:800px){.howto{grid-template-columns:1fr}}
+.howto .card{padding:16px}
+.howto .st{font-size:11px;font-weight:700;color:var(--blue);letter-spacing:.1em}
+.howto h4{font-size:14px;font-weight:700;color:var(--navy);margin:4px 0 4px}
+.howto p{font-size:12.5px;color:var(--ink-2)}
+.lay-leg{display:flex;gap:16px;flex-wrap:wrap;margin:8px 2px 14px;font-size:12px;color:var(--muted);align-items:center}
+
+/* ===== roadmap ===== */
+.months{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}
+@media(max-width:800px){.months{grid-template-columns:repeat(2,1fr)}}
+.mo{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px}
+.mo .m{font-size:13px;font-weight:800;color:var(--navy)}
+.mo ul{list-style:none;margin-top:8px}
+.mo li{font-size:12.5px;color:var(--ink-2);padding:4px 0 4px 14px;position:relative}
+.mo li::before{content:"";position:absolute;left:0;top:10px;width:7px;height:7px;border-radius:2px;background:var(--blue)}
+.mo li.rt::before{background:var(--t3)}
+.mo li.pt::before{background:var(--navy)}
+.step-card{border-top:3px solid var(--navy)}
+.step-card .st{font-size:11px;font-weight:700;color:var(--blue);letter-spacing:.08em}
+.step-card h4{font-size:15px;font-weight:700;color:var(--navy);margin:4px 0 7px}
+.step-card p{font-size:12.5px;color:var(--ink-2)}
+.step-card .why{margin-top:10px;padding:9px 11px;background:var(--blue-soft);border-radius:9px;font-size:12px;color:#1c5cab}
+.rhythm{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
+.rhythm .r{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:12px 16px;flex:1;min-width:220px}
+.rhythm .r b{color:var(--navy);font-size:13.5px}
+.rhythm .r p{font-size:12.5px;color:var(--ink-2);margin-top:3px}
+
+/* ===== monthly revenue ===== */
+.rev-sum{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}
+@media(max-width:900px){.rev-sum{grid-template-columns:repeat(2,1fr)}}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:15px 17px}
+.stat .l{font-size:12px;font-weight:600;color:var(--ink-2)}
+.stat .v{font-size:23px;font-weight:800;color:var(--navy);margin-top:3px;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.stat .s{font-size:11.5px;color:var(--muted);margin-top:3px}
+.stat.acc{border-top:3px solid var(--t1)}
+.stat.acc2{border-top:3px solid var(--t2)}
+.rchart-wrap{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;margin-bottom:14px}
+.rchart-head{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.rchart-head h3{font-size:14.5px;font-weight:700;color:var(--navy);margin-right:auto}
+.rleg{font-size:12px;color:var(--ink-2)}
+.rchart{display:flex;align-items:flex-end;gap:8px;height:170px;margin-top:16px;border-bottom:1px solid var(--line);padding-bottom:0}
+.rmon{flex:1;display:flex;flex-direction:column;justify-content:flex-end;height:100%}
+.rbars{display:flex;align-items:flex-end;justify-content:center;gap:2px;height:100%}
+.rbar{width:38%;max-width:16px;border-radius:4px 4px 0 0;min-height:2px;transition:height .25s}
+.rxlab{display:flex;gap:8px;margin-top:6px}
+.rxlab span{flex:1;text-align:center;font-size:10.5px;color:var(--muted)}
+.rev-table-wrap{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:6px 16px 12px;overflow-x:auto}
+.rev-table{width:100%;border-collapse:collapse;min-width:560px}
+.rev-table th{font-size:11.5px;color:var(--muted);font-weight:600;text-align:left;padding:10px 8px;border-bottom:1px solid var(--line-soft)}
+.rev-table th.r, .rev-table td.r{text-align:right}
+.rev-table td{padding:7px 8px;border-bottom:1px solid var(--line-soft);font-size:13px;vertical-align:middle;font-variant-numeric:tabular-nums}
+.rev-table tr:last-child td{border-bottom:none}
+.rev-table tr.tot td{font-weight:800;color:var(--navy);border-top:2px solid var(--line);background:#fafbfd}
+.rev-table .mon{font-weight:600;color:var(--ink)}
+.rev-in{width:110px;border:1px solid var(--line);border-radius:8px;padding:6px 9px;font-size:13px;text-align:right;background:#fbfcfe;font-variant-numeric:tabular-nums}
+.rev-in:focus{outline:2px solid var(--blue);outline-offset:-1px;background:#fff}
+.rev-eq{font-size:11.5px;color:var(--muted);margin-left:6px;white-space:nowrap}
+.gap-pos{color:var(--serious);font-weight:600}
+.gap-zero{color:var(--muted)}
+
+footer{max-width:1180px;margin:0 auto;padding:0 28px 40px;color:var(--muted);font-size:12px}
+@media print{.hdr{background:var(--navy)}.tabs,.track-tools{display:none}section{display:block!important;page-break-before:always}}
+</style>
+
+<div class="hdr">
+  <div class="hdr-in">
+    <div class="kicker">노무법인 도원 · 2026 시즌2</div>
+    <h1>OKR 대시보드</h1>
+    <div class="sub">목표수립 컨설팅 결과(가인지컨설팅그룹 × 노무법인 도원, 2026.08)를 기반으로 한 전사 목표·팀 CSF·KR 트래킹 보드</div>
+    <div class="hdr-chips">
+      <span class="chip">전사 목표 <b>매출 82~84억</b></span>
+      <span class="chip">연계매출 <b>+15억</b></span>
+      <span class="chip"><b>5개 팀</b> · CSF 15개</span>
+      <span class="chip">사이클 <b>9~12월 · 4개월</b></span>
+    </div>
+    <nav class="tabs" id="tabs">
+      <button class="tab on" data-t="home">전사 개요</button>
+      <button class="tab" data-t="teams">팀별 CSF</button>
+      <button class="tab" data-t="align">정렬맵</button>
+      <button class="tab" data-t="track">KR 트래킹</button>
+      <button class="tab" data-t="rev">월 매출</button>
+      <button class="tab" data-t="road">실행 로드맵</button>
+    </nav>
+  </div>
+</div>
+
+<main>
+
+<!-- ============ HOME ============ -->
+<section id="sec-home" class="on">
+  <div class="hero">
+    <div class="card hero-num">
+      <div class="lbl">2026 전사 매출 목표</div>
+      <div class="val">82~84<span class="unit">억</span></div>
+      <div class="note">직접매출 3개 팀 62억 + 기금팀 5억 + 세무협업 15억 = 82억<br>대외협력·마케팅 기여매출은 타 팀 매출에 포함</div>
+    </div>
+    <div class="card">
+      <h3>매출 구성</h3>
+      <div class="stack">
+        <div class="stack-bar" id="rev-stack"></div>
+        <div class="stack-leg" id="rev-leg"></div>
+      </div>
+      <div style="margin-top:16px;border-top:1px solid var(--line-soft);padding-top:12px">
+        <h3 style="font-size:13.5px">팀별 목표</h3>
+        <div id="team-bars"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-t">전사 5대 핵심과제</div>
+  <div class="sec-d">모든 팀의 CSF는 아래 다섯 과제 중 하나 이상에 연결됩니다.</div>
+  <div class="grid g5" id="objectives"></div>
+
+  <div class="sec-t">팀 한눈에 보기</div>
+  <div class="sec-d">카드를 누르면 해당 팀의 CSF 상세로 이동합니다.</div>
+  <div class="grid g3" id="team-cards"></div>
+
+  <div class="grid g2" style="margin-top:30px">
+    <div class="card">
+      <h3>왜 이 체계인가 — 진단 → 조치</h3>
+      <div class="sec-d" style="margin:4px 0 8px">팀장 인터뷰에서 공통 확인된 구조적 이슈와, 이번 체계가 대응하는 방식입니다.</div>
+      <div id="diagnosis"></div>
+    </div>
+    <div class="card">
+      <h3>경영진 결정 사항 3가지</h3>
+      <div class="sec-d" style="margin:4px 0 8px">팀이 스스로 정할 수 없어, 9월 수립 전에 확정되어야 하는 항목입니다.</div>
+      <div id="decisions"></div>
+      <div style="margin-top:14px;padding:12px 14px;background:var(--blue-soft);border-radius:10px;font-size:12.5px;color:#1c5cab">
+        <b>다음 스텝 · 3개월 1 Cycle 완주</b> — 9월 수립 → 10·11월 실행·스프린트 미팅 → 12월 사이클 마무리 회고. 이 대시보드의 KR 트래킹 탭이 그 기록판입니다.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TEAMS ============ -->
+<section id="sec-teams">
+  <div class="sec-t">팀별 CSF 정의서</div>
+  <div class="sec-d">각 팀이 "무엇을 잘해야 성과가 나는가"를 정리한 나침반입니다. CSF는 5개 관점으로 발산하고 4개 기준(연결성·기여도·통제가능성·측정가능성)으로 선별했습니다.</div>
+  <div class="tsel" id="team-sel"></div>
+  <div id="team-detail"></div>
+</section>
+
+<!-- ============ ALIGN ============ -->
+<section id="sec-align">
+  <div class="sec-t">전사 핵심과제 – 부서 CSF 정렬맵</div>
+  <div class="sec-d">가로는 전사 5대 과제, 세로는 조직입니다. 빗금 칸은 직접 담당이 없는 영역입니다.</div>
+  <div class="amap-wrap"><table class="amap" id="amap"></table></div>
+  <div class="legend-inline">
+    <span><span class="sw empty"></span>직접 담당 없음</span>
+    <span><span style="font-style:italic;color:var(--muted)">간접</span> — 타 팀 매출을 통해 간접 기여</span>
+  </div>
+  <div class="grid g2" style="margin-top:18px">
+    <div class="card issue gap">
+      <h4>공백 — 데이터댐 사업화 오너 부재</h4>
+      <p>HR·대외협력·마케팅·개발팀이 각자 데이터를 만들고 있으나, <b>이 데이터를 모아 매출로 바꾸는 책임자가 지정되어 있지 않습니다.</b> 전사 과제 중 담당 칸이 비어 있는 유일한 항목입니다. 세무협업 15억 역시 이번 5개 팀 CSF 체계 밖에 있습니다.</p>
+    </div>
+    <div class="card issue">
+      <h4>중복 — 연계매출을 세 팀이 동시 추진</h4>
+      <p>HR(컨설팅→법률), 노무관리(부가자문 업셀), 대외협력(DB 재활성)이 모두 연계매출을 목표로 두고 있어, 같은 고객에게 서로 다른 팀이 접근할 위험이 있습니다. <b>리드 소유권 규칙</b>이 필요합니다.</p>
+    </div>
+  </div>
+  <div class="card" style="margin-top:14px;background:var(--blue-soft);border-color:transparent">
+    <p style="font-size:13px;color:#1c5cab"><b>권고</b> — 두 항목 모두 팀이 스스로 풀 수 없는 문제로, 경영진의 결정 사항입니다. OKR 실행 전에 정리되면 각 팀 CSF가 충돌 없이 실행됩니다.</p>
+  </div>
+</section>
+
+<!-- ============ TRACK ============ -->
+<section id="sec-track">
+  <div class="sec-t">KR 뱅크 & 트래킹</div>
+  <div class="sec-d">각 CSF를 무엇으로 측정할지 모은 지표 후보입니다. 목표값(N)은 9월 시즌2 수립 때 팀장·경영진이 확정하며, 확정 후 이 보드에 목표·실적을 입력해 진척을 관리합니다.</div>
+
+  <div class="howto" style="margin-bottom:18px">
+    <div class="card"><div class="st">STEP 1</div><h4>CSF당 KR은 2~3개까지만</h4><p>뱅크의 모든 지표를 쓰지 않습니다. 이번 분기에 실제로 집중할 것만 선택하세요.</p></div>
+    <div class="card"><div class="st">STEP 2</div><h4>Output을 반드시 하나 포함</h4><p>매출(Outcome)만 잡으면 '어떻게'가 사라집니다. 손에 잡히는 산출물을 최소 하나 포함해야 주간 관리가 됩니다.</p></div>
+    <div class="card"><div class="st">STEP 3</div><h4>목표값은 달성선의 120~130%</h4><p>너무 높으면 시작 전에 포기하고, 너무 낮으면 도전이 아닙니다. 바쁜 팀은 하나에 집중시키세요.</p></div>
+  </div>
+
+  <div class="track-tools">
+    <span id="track-teamsel" style="display:flex;gap:8px;flex-wrap:wrap"></span>
+    <button class="tool-btn" id="btn-export">데이터 내보내기</button>
+    <button class="tool-btn" id="btn-import">가져오기</button>
+    <input type="file" id="file-import" accept=".json" style="display:none">
+    <button class="tool-btn" id="btn-reset">초기화</button>
+    <span class="save-note" id="save-note"></span>
+  </div>
+
+  <div class="card" style="margin-bottom:16px">
+    <h3>팀별 종합 진척</h3>
+    <div class="sec-d" style="margin:2px 0 6px">목표·실적이 모두 입력된 지표들의 평균 달성률입니다.</div>
+    <div id="track-summary"></div>
+  </div>
+
+  <div class="lay-leg">
+    <span><span class="lay A">선행</span> Activity · 매주 수행하는 활동 (통제가능성 가장 높음)</span>
+    <span><span class="lay O">Output</span> 활동이 만든 산출물 · KR을 여기에 둠</span>
+    <span><span class="lay K">KPI</span> Outcome · 산출물이 쌓여 나오는 결과</span>
+  </div>
+
+  <div id="track-body"></div>
+</section>
+
+<!-- ============ REV ============ -->
+<section id="sec-rev">
+  <div class="sec-t">월 매출 트래킹 — 입금 기준 · 세금계산서 발행 기준</div>
+  <div class="sec-d">팀별 월 매출을 두 기준으로 나란히 기록합니다. 입력 단위는 <b>만원</b>입니다 (예: 2억 5,000만원 → 25000). 입력값은 KR 트래킹과 같은 저장소에 자동 저장되며, 내보내기/가져오기에 함께 포함됩니다.</div>
+
+  <div class="track-tools">
+    <span id="rev-teamsel" style="display:flex;gap:8px;flex-wrap:wrap"></span>
+    <span class="save-note" id="rev-note"></span>
+  </div>
+
+  <div class="rev-sum" id="rev-summary"></div>
+
+  <div class="rchart-wrap">
+    <div class="rchart-head">
+      <h3 id="rchart-title">월별 매출 비교</h3>
+      <span class="rleg"><span class="dot" style="background:var(--t1)"></span>입금 기준</span>
+      <span class="rleg"><span class="dot" style="background:var(--t2)"></span>세금계산서 발행 기준</span>
+    </div>
+    <div class="rchart" id="rchart"></div>
+    <div class="rxlab" id="rxlab"></div>
+  </div>
+
+  <div class="rev-table-wrap">
+    <table class="rev-table" id="rev-table"></table>
+  </div>
+  <p class="small mut" style="margin-top:10px">※ 전사 합계는 직접매출 3팀(기업지원·HR사업본부·노무관리)의 합입니다. 대외협력·마케팅의 기여매출은 타 팀 매출에 포함되므로 중복 방지를 위해 합계에서 제외하며, 기금팀 5억·세무협업 15억은 이 보드 밖에서 별도 관리됩니다.</p>
+</section>
+
+<!-- ============ ROAD ============ -->
+<section id="sec-road">
+  <div class="sec-t">실행 로드맵 — 4개월 1 Cycle (9~12월)</div>
+  <div class="sec-d">이번 4주의 결과물이 이미 목표 수립의 재료이므로, 도원이 자체적으로 한 사이클을 돌릴 수 있습니다.</div>
+
+  <div class="months" id="months"></div>
+
+  <div class="grid g2" id="road-steps"></div>
+
+  <div class="sec-t" style="margin-top:26px">운영 리듬</div>
+  <div class="rhythm">
+    <div class="r"><b>OKR 스프린트 미팅 · 주간</b><p>한 주 실행을 점검. 각자 미리 적어 오고, 자리에서는 확인과 조정만.</p></div>
+    <div class="r"><b>OKR 부스팅 미팅 · 월간</b><p>목표 진척을 보고 남은 기간의 우선순위를 조정.</p></div>
+    <div class="r"><b>OKR 파티 · 사이클 마무리</b><p>목표 대비 결과 리뷰, 지식 나눔, 2027 방향과 1Q 과제 공유.</p></div>
+  </div>
+
+  <div class="card" style="margin-top:18px;border-left:4px solid var(--warn)">
+    <h3 style="font-size:14px">자체 수행 시 유의 지점</h3>
+    <p style="font-size:13px;color:var(--ink-2);margin-top:6px">· 첫 성과 합의 미팅에서 <b>경영진이 방향을 문장으로 내놓지 못하면</b>, 9월 목표는 다시 매출 숫자만 남게 됩니다.<br>· 워크샵 진행을 팀장 중 한 명이 맡으면 그 팀장의 일만 늘어납니다. <b>경영진이나 OKR지원센터가 진행</b>을 맡는 편이 안전합니다.<br>· 분기마다 <b>종결 선언 루틴</b> — 끝났다는 선언이 있어야 다음 과제가 그 위에 쌓이지 않습니다.</p>
+  </div>
+</section>
+
+</main>
+<footer>출처: 노무법인 도원 목표수립 컨설팅 결과 보고 (가인지컨설팅그룹, 2026.08.21) · 이 대시보드의 목표값(N)은 9월 시즌2 OKR 수립 시 확정됩니다.</footer>
+
+<script>
+/* ================= DATA ================= */
+const TCOLORS = ['#2a78d6','#eb6834','#1baf7a','#eda100','#e87ba4'];
+
+const TEAMS = [
+{ id:'corp', name:'기업지원팀', lead:'전준수 팀장', size:'9.5명', type:'TYPE B · 성과·프로젝트형', goal:'30.0억', goalNum:30,
+  mission:'기업이 놓친 돈(지원금·4대보험 환급)을 <b>찾아내 대신 받아준다.</b>',
+  rep:'정책 시행·개편 시점을 선점해 리드를 계약으로 전환', repKpi:'진단→계약 전환율',
+  csfs:[
+    { t:'정책이 시행·개편될 때 가장 먼저 알려, 지원금 리드를 계약으로 전환한다', m:'지원금 계약 건수 · 매출 18억',
+      c:['전사 매출·영업 독립과 직결','18억 계약의 관문','브리핑·진단·제안을 팀이 실행','발송→진단→계약 전환율'] },
+    { t:'환급을 빠르고 정확하게(찾아드림) 처리해, 고객이 다시 맡기게 만든다', m:'환급 매출 12억 · 재수임률 · 건당 처리일수',
+      c:['전사 매출·재수임과 직결','속도·정확도가 재수임 좌우','검토 로직을 팀이 개선','처리일수 · 검토 오류율'] },
+    { t:'사업장 관리와 반복 서류를 시스템으로 옮겨, 같은 인원으로 더 많은 건을 처리한다', m:'인당 매출 · 처리 가능 건수 · 담당자별 접수 가시성',
+      c:['전사 AX·생산성과 직결','9.5명이 30억 — 캐파가 관건','자동화 대상을 팀이 선정','적용 비율 · 건당 투입시간'] }
+  ],
+  kr:[
+    { csf:'CSF 1 · 지원금 선제 전환', items:[
+      {l:'A', n:'월 브리핑 발송', u:'건'}, {l:'A', n:'사전진단 신청', u:'건'}, {l:'A', n:'진단→계약 전환율', u:'%'},
+      {l:'O', n:'지원금 신규 계약', u:'건'}, {l:'O', n:'접수·신청 완료', u:'건'},
+      {l:'K', n:'지원금 매출', u:'억', t0:18} ]},
+    { csf:'CSF 2 · 환급 리드타임', items:[
+      {l:'A', n:'건당 처리일수', u:'일 이내', inv:1}, {l:'A', n:'찾아드림 검토 오류율', u:'%', inv:1},
+      {l:'O', n:'환급 처리 완료', u:'건'}, {l:'O', n:'재수임 계약', u:'건'},
+      {l:'K', n:'환급 매출', u:'억', t0:12}, {l:'K', n:'재수임률', u:'%'} ]},
+    { csf:'CSF 3 · 관리 시스템화', items:[
+      {l:'A', n:'ERP 이관 업무', u:'종'}, {l:'A', n:'담당자별 접수 예정 가시화율', u:'%'},
+      {l:'O', n:'자동화 처리 건수', u:'건'}, {l:'O', n:'표준 프로세스', u:'종'},
+      {l:'K', n:'인당 매출', u:'억'}, {l:'K', n:'처리 가능 건수 증가', u:'%'} ]}
+  ]},
+{ id:'hr', name:'HR사업본부', lead:'조소윤 팀장', size:'8명 · 전원 노무사', type:'TYPE B · 성과·프로젝트형', goal:'17.0억', goalNum:17,
+  mission:'기업의 노무 리스크·조직 과제를 컨설팅·법률로 풀고, <b>병원 산재라는 새 시장을 연다.</b>',
+  rep:'병원 제휴로 산재 유입 경로를 만든다', repKpi:'제휴 병원 · 인입 건수',
+  csfs:[
+    { t:'병원과 제휴해, 산재 사건이 도원으로 유입되는 경로(부스·Hot-Line)를 만든다', m:'제휴 병원 수 · 인입 건수 → 산재 매출 7.5억',
+      c:['신규 7.5억·신시장 진입','경로가 없으면 매출이 0','제휴·부스를 팀이 구축','병원 수 · 인입 · 수임률'] },
+    { t:'특정 영역에 사건 데이터를 쌓아, 단가를 지킬 근거를 만든다', m:'영역별 수행 사례 수 · 평균 단가 · 수임 전환율',
+      c:['매출·브랜드 포지셔닝과 직결','성과 공식의 약한 항이 단가','집중 영역을 팀이 선택','누적 사례 · 제안 채택률'] },
+    { t:'컨설팅 고객을 법률자문까지 연계해, 한 고객에게서 더 오래·더 크게 번다', m:'법률자문 제안 건수 · 연계 계약 수 · 동시고객 비율',
+      c:['전사 연계매출 과제와 직결','객단가·이탈방지 동시 효과','연계 프로세스를 팀이 설계','제안 건수 · 연계 계약 수'] }
+  ],
+  kr:[
+    { csf:'CSF 1 · 산재 파이프라인', items:[
+      {l:'A', n:'제휴 병원', u:'개'}, {l:'A', n:'Hot-Line 인입 월', u:'건'}, {l:'A', n:'부스 접점', u:'건'},
+      {l:'O', n:'산재 수임 계약', u:'건'},
+      {l:'K', n:'산재 청구대행 매출', u:'억', t0:7.5} ]},
+    { csf:'CSF 2 · 데이터로 단가 방어', items:[
+      {l:'A', n:'집중 영역 수행 사례', u:'건'}, {l:'A', n:'사례 문서화', u:'건'},
+      {l:'O', n:'영역 레퍼런스 자료', u:'종'}, {l:'O', n:'수주', u:'건'},
+      {l:'K', n:'평균 단가', u:'만원'}, {l:'K', n:'수임 전환율', u:'%'} ]},
+    { csf:'CSF 3 · 법률 연계 업셀', items:[
+      {l:'A', n:'법률자문 제안 월', u:'건'}, {l:'A', n:'컨설팅 고객 대비 제안율', u:'%'},
+      {l:'O', n:'법률 연계 계약', u:'건'},
+      {l:'K', n:'연계 계약매출', u:'억'}, {l:'K', n:'동시고객 비율', u:'%'} ]}
+  ]},
+{ id:'labor', name:'노무관리팀', lead:'김태현 팀장', size:'9명 · 건설·급여 2파트', type:'TYPE A · 반복형', goal:'15.0억', goalNum:15,
+  mission:'건설·급여 사업장의 반복 실무(정산·신고·급여)를 <b>정확하게 대행해 신뢰를 쌓는다.</b>',
+  rep:'시즌 정산·신고를 밀리지 않고 정확히 처리해 재수임', repKpi:'착수 리드타임 · 오류율',
+  csfs:[
+    { t:'정산·신고 시즌에 밀리지 않고 정확하게 처리해, 추징 없이 재수임을 이끈다', m:'시즌 착수 리드타임 · 오류 반려율 → 재수임률',
+      c:['건설 매출·재수임과 직결','정확도가 추징 리스크를 좌우','착수 시점·검증은 팀 영역','착수일 · 오류 반려율'] },
+    { t:'급여를 효율적으로 처리해 마진을 지키고, 부가자문으로 매출을 넓힌다', m:'건당 처리시간 · 부가자문 제안·체결 건수',
+      c:['연계매출·AX 생산성과 직결','효율이 곧 캐파이자 마진','자동화·제안 루틴을 팀이 운영','처리시간 · 제안 건수'] },
+    { t:"고정업무의 성과를 QCD로 보고, 관리·교육 기여를 '지식 건수'로 가시화한다", m:'품질(오류율) · 비용(건당 투입) · 납기(리드타임) · 지식 건수',
+      c:['전사 생산성 과제와 연결','목표를 지어내던 문제를 해소','측정 기준을 팀이 정의','QCD 3지표 + 문서 건수'] }
+  ],
+  kr:[
+    { csf:'CSF 1 · 시즌 캐파·정확도', items:[
+      {l:'A', n:'시즌 착수 리드타임', u:'일 이내', inv:1}, {l:'A', n:'정산 오류 반려율', u:'% 이하', inv:1},
+      {l:'O', n:'확정정산 완료', u:'건'}, {l:'O', n:'보험료 신고 완료', u:'건'},
+      {l:'K', n:'확정정산 매출', u:'억'}, {l:'K', n:'건설 재수임률', u:'%'} ]},
+    { csf:'CSF 2 · 급여 효율·업셀', items:[
+      {l:'A', n:'급여 건당 처리시간 단축', u:'%'}, {l:'A', n:'부가자문 제안 월', u:'건'},
+      {l:'O', n:'월 급여 처리', u:'건'}, {l:'O', n:'부가자문 체결', u:'건'},
+      {l:'K', n:'급여 매출', u:'억'}, {l:'K', n:'부가자문 전환매출', u:'억'} ]},
+    { csf:'CSF 3 · QCD · 지식', items:[
+      {l:'A', n:'주간 QCD 기록률', u:'%'}, {l:'A', n:'팀원 1인당 지식 문서', u:'건'},
+      {l:'O', n:'정리된 지식 문서', u:'건'}, {l:'O', n:'표준 서식', u:'종'},
+      {l:'K', n:'오류율 감소', u:'%'}, {l:'K', n:'신입 온보딩 단축', u:'주'} ]}
+  ]},
+{ id:'biz', name:'대외협력팀', lead:'최린 팀장', size:'2월 신설', type:'TYPE C · 리드 기여형', goal:'기여 10억', goalNum:10, goalContrib:true,
+  mission:'새 고객과 미접촉 DB를 발굴해, <b>계약할 전문가팀으로 연결한다.</b>',
+  rep:'콜 → 미팅 → 핸드오프 전환율을 끌어올린다', repKpi:'월 발굴 20 → 전환 8',
+  csfs:[
+    { t:'콜에서 미팅까지 각 단계 전환을 끌어올려, 발굴을 실제 계약으로 잇는다', m:'콜 수 · 유효 리드 · 미팅 전환율 → 월 전환 8건 · 기여매출 10억',
+      c:['영업 독립(아웃바운드)과 직결','단 전환율의 곱이 기여매출','콜·타겟·미팅은 팀이 수행','단계별 전환율 로그'] },
+    { t:'잠자는 6,000개 DB를 분류·정렬해 다시 깨우고, 새 영업 없이 매출로 되살린다', m:'DB 분류 완료율 · 접촉 건수 · 재활성 응답률',
+      c:['연계매출·데이터 자산화','콜드콜보다 전환 효율이 높음','세그먼트·주기를 팀이 운영','접촉 수 · 응답률 · 전환'] },
+    { t:'발굴한 리드를 전문가에게 정확히 넘기고, 클로징 이후까지 추적해 새지 않게 한다', m:'핸드오프 리드타임 · 전문가 착수율 · 계약 전환율',
+      c:['데이터댐·영업 독립과 직결','새면 기여매출이 0','핸드오프 규칙을 팀이 관리','리드타임 · 착수율'] }
+  ],
+  kr:[
+    { csf:'CSF 1 · 아웃바운드 퍼널', items:[
+      {l:'A', n:'TM 콜 월', u:'건'}, {l:'A', n:'유효 발굴 리드 월', u:'건', t0:20}, {l:'A', n:'미팅 전환율', u:'%'},
+      {l:'O', n:'전문가팀 핸드오프', u:'건'}, {l:'O', n:'월 전환', u:'건', t0:8},
+      {l:'K', n:'기여매출', u:'억', t0:10} ]},
+    { csf:'CSF 2 · DB 재활성', items:[
+      {l:'A', n:'DB 분류 완료 (총 6,000건)', u:'%'}, {l:'A', n:'접촉 월', u:'건'}, {l:'A', n:'응답률', u:'%'},
+      {l:'O', n:'재활성 전환', u:'건'},
+      {l:'K', n:'재활성 기여매출', u:'억'} ]},
+    { csf:'CSF 3 · 핸드오프 정확도', items:[
+      {l:'A', n:'핸드오프 리드타임', u:'일', inv:1}, {l:'A', n:'전문가 착수율', u:'%'},
+      {l:'O', n:'핸드오프 완료', u:'건'}, {l:'O', n:'클로징 후 팔로업', u:'건'},
+      {l:'K', n:'핸드오프 리드 계약 전환율', u:'%'} ]}
+  ]},
+{ id:'mkt', name:'마케팅', lead:'최민 프로', size:'1인', type:'TYPE C · 리드 기여형', goal:'인바운드 엔진', goalNum:0, goalContrib:true,
+  mission:"콘텐츠·광고로 문의(리드)를 만들고, <b>성공사례를 다시 콘텐츠로 순환시킨다.</b>",
+  rep:"문의의 '질'을 만들어 영업에 넘긴다", repKpi:'유효문의 비율 · CPL',
+  csfs:[
+    { t:"문의의 '양'이 아니라 계약으로 이어지는 '질'을 만들어 영업에 넘긴다", m:'유효문의 비율 · 영업 전달 건수 → 인바운드 기여 계약매출',
+      c:['영업 독립·데이터댐과 직결','문의는 이미 2배, 다음은 전환','선별·핸드오프를 팀이 설계','유효문의 비율 · 리드타임'] },
+    { t:'문의 → 계약 데이터를 열어, 마케팅의 매출 기여를 증명 가능하게 만든다', m:'문의별 계약 여부·사유 기록률 · 채널별 기여 매출',
+      c:['데이터댐·CRM의 출발점','없으면 모든 판단이 추측','단독 불가 — 정보 개방 선행 필요','기록률 · 채널별 전환율'] },
+    { t:'성공사례를 콘텐츠 자산으로 되돌려 유입을 키우고, 광고비 효율(CPL)을 지킨다', m:'성공사례 콘텐츠 건수 · 채널별 CPC → CPL · ROAS',
+      c:['영업 독립·CRM과 직결','CPL이 무너지면 모델 실패','콘텐츠화·채널 배분을 조정','콘텐츠 건수 · CPL · ROAS'] }
+  ],
+  kr:[
+    { csf:'CSF 1 · 리드 품질', items:[
+      {l:'A', n:'유효문의 비율', u:'%'}, {l:'A', n:'핸드오프 리드타임', u:'시간', inv:1},
+      {l:'O', n:'영업 전달 유효 리드', u:'건'},
+      {l:'K', n:'인바운드 기여 계약매출', u:'억'} ]},
+    { csf:'CSF 2 · 데이터 개방', note:'선행지표는 마케팅 단독으로 달성 불가 — 문의·계약 데이터 접근 권한이 선행되어야 하며, 리더 결정 사항.', items:[
+      {l:'A', n:'문의별 계약 여부 기록률', u:'%'}, {l:'A', n:'계약 사유 수집', u:'건'},
+      {l:'O', n:'채널별 기여 리포트 월', u:'회'},
+      {l:'K', n:'채널별 전환율 가시화', u:'%'} ]},
+    { csf:'CSF 3 · 플라이휠 · CPL', items:[
+      {l:'A', n:'성공사례 콘텐츠화 월', u:'건'}, {l:'A', n:'채널별 CPC', u:'원', inv:1},
+      {l:'O', n:'성공사례 콘텐츠', u:'건'}, {l:'O', n:'콘텐츠 발행 월', u:'건'},
+      {l:'K', n:'CPL (리드 1건당 획득 비용)', u:'원', inv:1}, {l:'K', n:'광고 ROAS', u:''} ]}
+  ]}
+];
+
+const OBJECTIVES = [
+ {code:'A', t:'매출 82~84억', d:'직접매출 3팀 62억 + 기금팀 5억 + 세무협업 15억.'},
+ {code:'B', t:'연계매출 +15억', d:'한 고객에게 두 가지 이상의 서비스를 연결해 만드는 매출.'},
+ {code:'C', t:'영업 독립', d:'아웃바운드·인바운드 자체 파이프라인으로 리드를 스스로 만든다.'},
+ {code:'D', t:'AX · 생산성', d:'자동화·시스템화로 같은 인원이 더 많은 건을 처리한다.'},
+ {code:'E', t:'데이터댐', d:'사건·문의·DB 데이터를 모아 매출로 바꿀 수 있는 자산으로.'}
+];
+
+const DIAG = [
+ ['과제가 종결 선언 없이 계속 쌓임','분기마다 종결 선언 루틴'],
+ ['매출 숫자만 전달되고 근거는 미공유','전사 목표에 달성 방향 문장을 함께 선언'],
+ ['성과 측정이 매출·건수에 편중','QCD·지식 건수로 측정 축 확대'],
+ ['실행 부담이 팀장에게 집중','주간 스프린트·월간 부스팅으로 팀 단위 실행']
+];
+
+const DECIDE = [
+ '<b>전사 목표의 달성 방향 문장</b> — 매출을 어느 경로로 달성할 것인가(AX 전환)를 전사 차원에서 선언',
+ '<b>데이터댐 오너 지정</b> — 흩어진 데이터를 모아 매출로 바꾸는 책임자 확정',
+ '<b>리드 소유권 규칙</b> — 연계매출을 추진하는 세 팀이 같은 고객에서 충돌하지 않도록'
+];
+
+const AMAP = {
+ cols:['A. 매출 82~84억','B. 연계매출 +15억','C. 영업 독립','D. AX · 생산성','E. 데이터댐'],
+ rows:[
+  {n:'기업지원', s:'30억', c:['지원금·환급 전환', null, '정책 선제 = 인바운드', '사업장 관리 시스템화', null]},
+  {n:'HR사업본부', s:'17억', c:['산재 신규 · 표준화', '컨설팅 → 법률 연계', null, '상품 모듈화', '사건 데이터 축적']},
+  {n:'노무관리', s:'15억', c:['정산 · 급여 효율', '부가자문 업셀', null, '급여 자동화 · QCD', null]},
+  {n:'대외협력', s:'기여 10억', c:['간접', 'DB 재활성', '아웃바운드 퍼널', null, 'DB 분류 · 핸드오프 기록']},
+  {n:'마케팅', s:'인바운드', c:['간접', null, '인바운드 퍼널', '광고비 효율', '문의–계약 데이터']},
+  {n:'개발팀', s:'AX 토대', c:['간접', null, null, '자동화 · 찾아드림 · ERP', '데이터 인프라']}
+ ]};
+
+const MONTHS = [
+ {m:'9월 · 수립', li:[['pt','성과 합의 미팅 — 경영진 + 팀장'],['','비전 · OKR 챌린지 워크샵'],['','팀별 4분기 OKR 확정 (KR 뱅크 활용)']]},
+ {m:'10월 · 실행', li:[['rt','OKR 스프린트 미팅 (주간) 시작'],['','OKR 부스팅 미팅 (월간)'],['','주 1회 코칭 (가인지 동행 시)']]},
+ {m:'11월 · 실행', li:[['rt','주간 스프린트 지속'],['','OKR 부스팅 미팅 (월간)'],['','남은 기간 우선순위 조정']]},
+ {m:'12월 · 마무리', li:[['pt','4Q OKR 팀별 리뷰'],['','지식 나눔 — 배운 것 한 장 공유'],['pt','OKR 파티 · 2027 방향과 1Q 과제 공유']]}
+];
+
+const STEPS = [
+ {s:'STEP 1 · 8월 말 ~ 9월 1주 · 경영진 + 팀장', t:'팀장들과 성과 합의 미팅을 먼저 연다',
+  d:'하반기 전사 목표를 공유 — 매출 숫자와 함께 어떤 방향으로 달성할지까지. 남은 기간의 해결 과제를 함께 정리하고, 팀별로 기대하는 목표를 말이 아니라 문장으로 합의.',
+  w:'이 자리가 없으면 팀장이 "왜 이 목표인가"를 팀원에게 설명할 수 없습니다.'},
+ {s:'STEP 2 · 9월 2~4주 · 팀장 + OKR지원센터', t:'4분기 OKR을 수립한다',
+  d:'팀별 CSF 정의서에서 이번 분기에 집중할 CSF를 고르고, KR 뱅크에서 지표를 2~3개 골라 목표 숫자를 채워 4분기 OKR 확정. 정렬맵으로 다른 팀과 겹치거나 비는 곳을 확인.',
+  w:'재료가 이미 있어 팀당 반나절이면 초안이 나옵니다. 목표 숫자 합의에만 집중하면 됩니다.'},
+ {s:'STEP 3 · 10~11월 · 팀장', t:'주간 스프린트 · 월간 부스팅이 굴러가게 관리한다',
+  d:'스프린트(주간)는 한 주 실행 점검 — 각자 미리 적어 오고 자리에서는 확인·조정만. 부스팅(월간)은 목표 진척과 남은 기간 우선순위 조정. 지원센터는 양식 제공·운영 관리.',
+  w:'일이 팀장에게 몰리는 문제에 직접 대응하는 구간입니다.'},
+ {s:'STEP 4 · 12월 · 전사', t:'OKR 파티로 한 사이클을 닫는다',
+  d:'목표 대비 결과를 보고 못 미친 항목은 어디서 끊겼는지 확인. 각자 배운 것을 한 장으로 정리해 공유하고, 2027 전사 방향과 1Q 해결 과제를 같은 자리에서 확인.',
+  w:'끝났다는 선언이 있어야 다음 과제가 그 위에 쌓이지 않습니다.'}
+];
+
+/* ================= STATE ================= */
+const SKEY = 'dowon-okr-track-v1';
+let memStore = null, storeOK = true, MODE = 'local', ART = null, dirty = false, pubTimer = null, pubBusy = false;
+function loadLocal(){ try{ const s = localStorage.getItem(SKEY); return s ? JSON.parse(s) : {}; }catch(e){ storeOK = false; return memStore || {}; } }
+function saveLocal(st){ try{ localStorage.setItem(SKEY, JSON.stringify(st)); }catch(e){ storeOK = false; memStore = st; } }
+function saveState(st){
+  st._ts = new Date().toISOString();
+  if(MODE === 'shared'){ dirty = true; setNote('저장 대기 중…'); clearTimeout(pubTimer); pubTimer = setTimeout(publishShared, 2500); }
+  else if(MODE !== 'readonly'){ saveLocal(st); updateSaveNote(st); }
+}
+async function publishShared(){
+  if(!dirty || pubBusy || MODE !== 'shared') return;
+  pubBusy = true; dirty = false; setNote('저장 중…');
+  try{
+    await ART.publish({'data/state.json': JSON.stringify(STATE)});
+    pubBusy = false;
+    if(dirty){ clearTimeout(pubTimer); pubTimer = setTimeout(publishShared, 1500); } else updateSaveNote(STATE);
+  }catch(e){
+    pubBusy = false; const c = e && e.code;
+    if(c === 'not_writer' || c === 'not_granted' || c === 'consent_required'){ setReadOnly(); }
+    else if(c === 'conflict'){ /* someone saved first; the view reloads to the winning version */ }
+    else if(c === 'capability_disabled' || c === 'capability_removed' || c === 'not_declared'){
+      MODE = 'local'; saveLocal(STATE); setNote('⚠ 이 화면에서는 공유 저장이 지원되지 않아, 이 브라우저에만 저장됩니다');
+    }
+    else if(c === 'rate_limited'){ dirty = true; clearTimeout(pubTimer); pubTimer = setTimeout(publishShared, 10000); }
+    else { dirty = true; clearTimeout(pubTimer); pubTimer = setTimeout(publishShared, 5000); setNote('⚠ 저장이 지연되고 있습니다 — 자동 재시도 중'); }
+  }
+}
+function setNote(t){ const a = document.getElementById('save-note'), b = document.getElementById('rev-note'); if(a) a.textContent = t; if(b) b.textContent = t; }
+function updateSaveNote(st){
+  if(MODE === 'readonly'){ setNote('보기 전용 — 편집 권한이 있는 구성원만 입력할 수 있습니다'); return; }
+  const ts = st && st._ts ? new Date(st._ts).toLocaleString('ko-KR',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'}) : null;
+  if(MODE === 'shared'){ setNote(ts ? '팀 공유 보드에 저장됨 · 마지막 수정 ' + ts : '입력값은 팀 전체에 공유 저장됩니다'); return; }
+  if(!storeOK){ setNote('⚠ 이 화면에서는 임시 저장만 됩니다 — 내보내기로 백업하세요'); return; }
+  setNote(ts ? '이 브라우저에 자동 저장 · 마지막 수정 ' + ts : '입력값은 이 브라우저에 자동 저장됩니다');
+}
+function setReadOnly(){
+  MODE = 'readonly';
+  document.querySelectorAll('.num-in,.rev-in').forEach(i => i.disabled = true);
+  ['btn-import','btn-reset'].forEach(id => { const b = document.getElementById(id); if(b){ b.disabled = true; b.style.opacity = .5; } });
+  updateSaveNote(STATE);
+}
+const RO = () => MODE === 'readonly' ? 'disabled' : '';
+let STATE = {};
+document.addEventListener('visibilitychange', () => { if(document.visibilityState === 'hidden' && dirty && MODE === 'shared'){ clearTimeout(pubTimer); publishShared(); } });
+
+/* ================= HELPERS ================= */
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/</g,'&lt;');
+function pct(item, v){
+  if(!v || !(v.t > 0) || !(v.c >= 0) || v.c === '' || v.t === '') return null;
+  const t = +v.t, c = +v.c;
+  if(item.inv){ if(!(c > 0)) return null; return Math.min(t / c, 1); }
+  return Math.min(c / t, 1);
+}
+
+/* ================= TABS ================= */
+const tabs = document.querySelectorAll('.tab');
+function showTab(name){
+  tabs.forEach(b => b.classList.toggle('on', b.dataset.t === name));
+  document.querySelectorAll('main section').forEach(s => s.classList.toggle('on', s.id === 'sec-' + name));
+  window.scrollTo({top:0});
+}
+tabs.forEach(b => b.addEventListener('click', () => showTab(b.dataset.t)));
+
+/* ================= HOME ================= */
+(function renderHome(){
+  const seg = [['직접매출 3팀', 62, TCOLORS[0]], ['기금팀', 5, TCOLORS[1]], ['세무협업', 15, TCOLORS[2]]];
+  const tot = 82;
+  $('#rev-stack').innerHTML = seg.map(([n,v,c]) =>
+    `<div style="width:${(v/tot*100).toFixed(1)}%;background:${c}" title="${n} ${v}억"></div>`).join('');
+  $('#rev-leg').innerHTML = seg.map(([n,v,c]) =>
+    `<span><span class="dot" style="background:${c}"></span>${n} <b>${v}억</b></span>`).join('') + '<span class="mut">합계 82억 (+2억 도전)</span>';
+
+  const bars = [['기업지원',30,TCOLORS[0],'30.0억'],['HR사업본부',17,TCOLORS[1],'17.0억'],['노무관리',15,TCOLORS[2],'15.0억'],['대외협력',10,TCOLORS[3],'기여 10억']];
+  $('#team-bars').innerHTML = bars.map(([n,v,c,lbl]) =>
+    `<div class="tbar-row"><span class="nm">${n}</span><div class="tbar-track"><div class="tbar-fill" style="width:${v/30*100}%;background:${c}"></div></div><span class="v">${lbl}</span></div>`).join('')
+    + `<div class="tbar-row"><span class="nm">마케팅</span><span class="small mut" style="grid-column:2/4">인바운드 엔진 — 기여매출·CPL로 측정 (매출 목표 아님)</span></div>`;
+
+  $('#objectives').innerHTML = OBJECTIVES.map(o =>
+    `<div class="card obj-card"><div class="code">과제 ${o.code}</div><h4>${o.t}</h4><p>${o.d}</p></div>`).join('');
+
+  $('#team-cards').innerHTML = TEAMS.map((t,i) =>
+    `<div class="card" style="cursor:pointer;border-top:3px solid ${TCOLORS[i]}" data-team="${i}">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+        <h3>${t.name}</h3><span class="badge goal">${t.goal}</span></div>
+      <div class="small mut" style="margin:2px 0 8px">${t.type}</div>
+      <p style="font-size:13px;color:var(--ink-2)"><b style="color:var(--ink)">대표 CSF</b> · ${t.rep}</p>
+      <p class="small" style="color:var(--blue);font-weight:600;margin-top:5px">핵심지표 — ${t.repKpi}</p>
+    </div>`).join('');
+  $('#team-cards').addEventListener('click', e => {
+    const c = e.target.closest('[data-team]'); if(!c) return;
+    showTab('teams'); selectTeam(+c.dataset.team);
+  });
+
+  $('#diagnosis').innerHTML = DIAG.map(([a,b]) =>
+    `<div class="diag"><span class="from">${a}</span><span class="arr">→</span><span class="to">${b}</span></div>`).join('');
+  $('#decisions').innerHTML = DECIDE.map((d,i) =>
+    `<div class="decide"><span class="n">${i+1}</span><p>${d}</p></div>`).join('');
+})();
+
+/* ================= TEAMS ================= */
+let curTeam = 0;
+function selectTeam(i){
+  curTeam = i;
+  document.querySelectorAll('#team-sel .tbtn').forEach((b,j) => b.classList.toggle('on', j === i));
+  const t = TEAMS[i];
+  $('#team-detail').innerHTML = `
+    <div class="card">
+      <div class="team-head">
+        <span class="nm">${t.name}</span>
+        <span class="meta">${t.lead} · ${t.size}</span>
+        <span class="badge type">${t.type}</span>
+        <span class="badge goal">${t.goal}</span>
+      </div>
+      <div class="mission"><b style="color:var(--navy)">핵심 과업</b> — ${t.mission}</div>
+    </div>
+    ${t.csfs.map((c,ci) => `
+    <div class="card csf-card">
+      <span class="csf-tag">CSF ${ci+1}</span>
+      <h4>${esc(c.t)}</h4>
+      <div class="csf-meas">측정 — ${esc(c.m)}</div>
+      <div class="crit4">
+        <div><b>연결성</b>${esc(c.c[0])}</div>
+        <div><b>기여도</b>${esc(c.c[1])}</div>
+        <div><b>통제가능성</b>${esc(c.c[2])}</div>
+        <div><b>측정가능성</b>${esc(c.c[3])}</div>
+      </div>
+    </div>`).join('')}`;
+}
+$('#team-sel').innerHTML = TEAMS.map((t,i) =>
+  `<button class="tbtn"><span class="dot" style="background:${TCOLORS[i]}"></span>${t.name}</button>`).join('');
+document.querySelectorAll('#team-sel .tbtn').forEach((b,i) => b.addEventListener('click', () => selectTeam(i)));
+selectTeam(0);
+
+/* ================= ALIGN MAP ================= */
+(function renderAmap(){
+  let h = '<thead><tr><th>조직 · 목표</th>' + AMAP.cols.map(c => {
+    const [a,b] = c.split('. ');
+    return `<th>${a}. ${b}</th>`;
+  }).join('') + '</tr></thead><tbody>';
+  h += AMAP.rows.map(r => '<tr>' +
+    `<td class="rowh">${r.n}<span class="s">${r.s}</span></td>` +
+    r.c.map(cell => cell === null ? '<td class="empty">—</td>' :
+      cell === '간접' ? '<td class="ind">간접</td>' : `<td>${cell}</td>`).join('') +
+    '</tr>').join('');
+  $('#amap').innerHTML = h + '</tbody>';
+})();
+
+/* ================= TRACKING ================= */
+let trackTeam = 0;
+function itemId(ti,ci,ii){ return TEAMS[ti].id + '-' + ci + '-' + ii; }
+
+function renderTrackSummary(){
+  $('#track-summary').innerHTML = TEAMS.map((t,ti) => {
+    let sum = 0, n = 0;
+    t.kr.forEach((g,ci) => g.items.forEach((it,ii) => {
+      const v = STATE[itemId(ti,ci,ii)] || {};
+      const tv = v.t !== undefined && v.t !== '' ? v.t : (it.t0 !== undefined ? it.t0 : '');
+      const p = pct(it, {t: tv, c: v.c});
+      if(p !== null){ sum += p; n++; }
+    }));
+    const p = n ? sum / n : null;
+    return `<div class="sumline">
+      <span class="nm"><span class="dot" style="background:${TCOLORS[ti]}"></span>${t.name}</span>
+      <div class="ptrack"><div class="pfill" style="width:${p===null?0:(p*100).toFixed(0)}%;background:${TCOLORS[ti]}"></div></div>
+      <span class="v">${p===null ? '입력 전' : (p*100).toFixed(0) + '% · ' + n + '개 지표'}</span>
+    </div>`;
+  }).join('');
+}
+
+function renderTrackBody(){
+  const t = TEAMS[trackTeam], ti = trackTeam;
+  $('#track-body').innerHTML = t.kr.map((g,ci) => `
+    <div class="card" style="margin-bottom:14px">
+      <h3>${g.csf}</h3>
+      ${g.note ? `<p class="small" style="color:var(--serious);margin-top:4px">※ ${g.note}</p>` : ''}
+      <table class="kr-table">
+        <thead><tr><th style="width:70px">층위</th><th>지표</th><th style="width:100px">목표</th><th style="width:100px">현재</th><th class="pcell">달성률</th></tr></thead>
+        <tbody>
+        ${g.items.map((it,ii) => {
+          const id = itemId(ti,ci,ii);
+          const v = STATE[id] || {};
+          const tv = v.t !== undefined && v.t !== '' ? v.t : (it.t0 !== undefined ? it.t0 : '');
+          const p = pct(it, {t: tv, c: v.c});
+          return `<tr>
+            <td><span class="lay ${it.l}">${it.l === 'A' ? '선행' : it.l === 'O' ? 'Output' : 'KPI'}</span></td>
+            <td class="kr-name">${esc(it.n)}<span class="u">${it.u}${it.inv ? ' · 낮을수록 좋음' : ''}</span></td>
+            <td><input class="num-in" type="number" step="any" inputmode="decimal" placeholder="N" data-id="${id}" data-f="t" value="${tv}" ${RO()}></td>
+            <td><input class="num-in" type="number" step="any" inputmode="decimal" placeholder="—" data-id="${id}" data-f="c" value="${v.c !== undefined ? v.c : ''}" ${RO()}></td>
+            <td class="pcell"><div class="pbar"><div class="ptrack"><div class="pfill" data-p="${id}" style="width:${p===null?0:(p*100).toFixed(0)}%;background:${TCOLORS[ti]}"></div></div><span class="pnum" data-pn="${id}">${p===null?'–':(p*100).toFixed(0)+'%'}</span></div></td>
+          </tr>`;
+        }).join('')}
+        </tbody>
+      </table>
+    </div>`).join('');
+}
+
+$('#track-teamsel').innerHTML = TEAMS.map((t,i) =>
+  `<button class="tbtn"><span class="dot" style="background:${TCOLORS[i]}"></span>${t.name}</button>`).join('');
+document.querySelectorAll('#track-teamsel .tbtn').forEach((b,i) => b.addEventListener('click', () => {
+  trackTeam = i;
+  document.querySelectorAll('#track-teamsel .tbtn').forEach((x,j) => x.classList.toggle('on', j === i));
+  renderTrackBody();
+}));
+document.querySelectorAll('#track-teamsel .tbtn')[0].classList.add('on');
+
+$('#track-body').addEventListener('input', e => {
+  const inp = e.target.closest('.num-in'); if(!inp) return;
+  const id = inp.dataset.id, f = inp.dataset.f;
+  STATE[id] = STATE[id] || {};
+  STATE[id][f] = inp.value === '' ? '' : +inp.value;
+  saveState(STATE);
+  // find item def
+  const [tid, ci, ii] = [id.split('-')[0], +id.split('-')[1], +id.split('-')[2]];
+  const tIdx = TEAMS.findIndex(t => t.id === tid);
+  const it = TEAMS[tIdx].kr[ci].items[ii];
+  const v = STATE[id];
+  const tv = v.t !== undefined && v.t !== '' ? v.t : (it.t0 !== undefined ? it.t0 : '');
+  const p = pct(it, {t: tv, c: v.c});
+  document.querySelector(`[data-p="${id}"]`).style.width = (p === null ? 0 : (p*100).toFixed(0)) + '%';
+  document.querySelector(`[data-pn="${id}"]`).textContent = p === null ? '–' : (p*100).toFixed(0) + '%';
+  renderTrackSummary();
+});
+
+$('#btn-export').addEventListener('click', async () => {
+  const payload = JSON.stringify({app:'dowon-okr', exported:new Date().toISOString(), data:STATE}, null, 2);
+  const fname = '도원OKR_트래킹_' + new Date().toISOString().slice(0,10) + '.json';
+  let dl = null;
+  try{ if(window.claude && typeof window.claude.use === 'function') dl = await window.claude.use('downloads'); }catch(e){}
+  if(dl){ try{ await dl.save({filename: fname, data: payload}); }catch(e){} return; }
+  const blob = new Blob([payload], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = fname;
+  a.click(); URL.revokeObjectURL(a.href);
+});
+$('#btn-import').addEventListener('click', () => $('#file-import').click());
+$('#file-import').addEventListener('change', e => {
+  const f = e.target.files[0]; if(!f) return;
+  const r = new FileReader();
+  r.onload = () => {
+    try{
+      const j = JSON.parse(r.result);
+      STATE = (j && j.data) ? j.data : j;
+      saveState(STATE); renderTrackBody(); renderTrackSummary(); if(typeof renderRev === 'function') renderRev();
+    }catch(err){ $('#save-note').textContent = '⚠ 파일을 읽을 수 없습니다 — JSON 형식을 확인하세요'; }
+  };
+  r.readAsText(f); e.target.value = '';
+});
+let resetArmed = false;
+$('#btn-reset').addEventListener('click', () => {
+  if(!resetArmed){
+    resetArmed = true;
+    $('#btn-reset').textContent = '한 번 더 누르면 전체 삭제';
+    $('#btn-reset').style.color = 'var(--crit)';
+    setTimeout(() => { resetArmed = false; $('#btn-reset').textContent = '초기화'; $('#btn-reset').style.color = ''; }, 3500);
+    return;
+  }
+  STATE = {}; saveState(STATE);
+  resetArmed = false; $('#btn-reset').textContent = '초기화'; $('#btn-reset').style.color = '';
+  renderTrackBody(); renderTrackSummary(); if(typeof renderRev === 'function') renderRev();
+});
+
+
+/* ================= MONTHLY REVENUE ================= */
+const REV_TEAMS = [
+ {id:'corp', n:'기업지원팀', target:30},
+ {id:'hr', n:'HR사업본부', target:17},
+ {id:'labor', n:'노무관리팀', target:15},
+ {id:'biz', n:'대외협력팀', target:10, contrib:true},
+ {id:'mkt', n:'마케팅', target:null, contrib:true},
+ {id:'all', n:'전사 합계', target:62, agg:['corp','hr','labor']}
+];
+const REV_COLORS = {corp:TCOLORS[0], hr:TCOLORS[1], labor:TCOLORS[2], biz:TCOLORS[3], mkt:TCOLORS[4], all:'#16307a'};
+let revSel = 0;
+
+function revVal(tid, m, base){
+  const v = STATE['rev-' + tid + '-' + m + '-' + base];
+  return (v === undefined || v === '' || isNaN(+v)) ? 0 : +v;
+}
+function revGet(rt, m, base){ // 만원 단위
+  if(rt.agg) return rt.agg.reduce((s,id) => s + revVal(id, m, base), 0);
+  return revVal(rt.id, m, base);
+}
+function fmtMan(v){ // v in 만원
+  if(!v) return '—';
+  if(Math.abs(v) >= 10000){ const eok = v / 10000; return (Math.round(eok * 100) / 100).toLocaleString('ko-KR', {maximumFractionDigits:2}) + '억'; }
+  return v.toLocaleString('ko-KR') + '만';
+}
+
+function renderRev(){
+  const rt = REV_TEAMS[revSel];
+  document.querySelectorAll('#rev-teamsel .tbtn').forEach((b,j) => b.classList.toggle('on', j === revSel));
+  const months = Array.from({length:12}, (_,i) => i + 1);
+  const sumIn = months.reduce((s,m) => s + revGet(rt, m, 'in'), 0);
+  const sumTax = months.reduce((s,m) => s + revGet(rt, m, 'tax'), 0);
+  const tman = rt.target ? rt.target * 10000 : null;
+
+  // summary cards
+  $('#rev-summary').innerHTML = `
+    <div class="stat"><div class="l">연간 목표${rt.contrib ? ' (기여매출)' : ''}</div><div class="v">${rt.target ? rt.target + '억' : '—'}</div><div class="s">${rt.agg ? '직접매출 3팀 합계 기준' : rt.contrib ? '타 팀 매출에 포함되는 기여분' : '2026 팀 목표'}</div></div>
+    <div class="stat acc"><div class="l">입금 기준 누계</div><div class="v">${fmtMan(sumIn)}</div><div class="s">${tman ? '목표 대비 ' + (sumIn / tman * 100).toFixed(1) + '%' : '목표 미설정'}</div></div>
+    <div class="stat acc2"><div class="l">세금계산서 발행 누계</div><div class="v">${fmtMan(sumTax)}</div><div class="s">${tman ? '목표 대비 ' + (sumTax / tman * 100).toFixed(1) + '%' : '목표 미설정'}</div></div>
+    <div class="stat"><div class="l">발행 − 입금 (미수 갭)</div><div class="v">${fmtMan(sumTax - sumIn)}</div><div class="s">발행했지만 아직 입금되지 않은 규모</div></div>`;
+
+  // chart
+  const maxV = Math.max(1, ...months.map(m => Math.max(revGet(rt, m, 'in'), revGet(rt, m, 'tax'))));
+  $('#rchart-title').textContent = rt.n + ' · 월별 매출 비교';
+  $('#rchart').innerHTML = months.map(m => {
+    const a = revGet(rt, m, 'in'), b = revGet(rt, m, 'tax');
+    return `<div class="rmon"><div class="rbars">
+      <div class="rbar" style="height:${(a / maxV * 100).toFixed(1)}%;background:var(--t1)" title="${m}월 입금 ${fmtMan(a)}"></div>
+      <div class="rbar" style="height:${(b / maxV * 100).toFixed(1)}%;background:var(--t2)" title="${m}월 발행 ${fmtMan(b)}"></div>
+    </div></div>`;
+  }).join('');
+  $('#rxlab').innerHTML = months.map(m => `<span>${m}월</span>`).join('');
+
+  // table
+  const editable = !rt.agg;
+  let h = `<thead><tr><th style="width:70px">2026</th><th class="r">입금 기준 <span class="mut">(만원)</span></th><th class="r">세금계산서 발행 <span class="mut">(만원)</span></th><th class="r" style="width:120px">발행 − 입금</th></tr></thead><tbody>`;
+  h += months.map(m => {
+    const a = revGet(rt, m, 'in'), b = revGet(rt, m, 'tax');
+    const cell = base => {
+      const v = revGet(rt, m, base);
+      if(!editable) return `<td class="r">${v ? v.toLocaleString('ko-KR') : '—'}<span class="rev-eq">${v ? '= ' + fmtMan(v) : ''}</span></td>`;
+      const raw = STATE['rev-' + rt.id + '-' + m + '-' + base];
+      return `<td class="r"><input class="rev-in" type="number" step="any" min="0" inputmode="numeric" placeholder="0" data-rid="${rt.id}" data-m="${m}" data-base="${base}" value="${raw !== undefined && raw !== '' ? raw : ''}" ${RO()}><span class="rev-eq" data-eq="${rt.id}-${m}-${base}">${v ? '= ' + fmtMan(v) : ''}</span></td>`;
+    };
+    const gap = b - a;
+    return `<tr><td class="mon">${m}월</td>${cell('in')}${cell('tax')}<td class="r ${gap > 0 ? 'gap-pos' : 'gap-zero'}" data-gap="${m}">${gap ? fmtMan(gap) : '—'}</td></tr>`;
+  }).join('');
+  h += `<tr class="tot"><td>누계</td><td class="r" data-tot="in">${fmtMan(sumIn)}</td><td class="r" data-tot="tax">${fmtMan(sumTax)}</td><td class="r" data-tot="gap">${fmtMan(sumTax - sumIn)}</td></tr></tbody>`;
+  $('#rev-table').innerHTML = h;
+}
+
+$('#rev-teamsel').innerHTML = REV_TEAMS.map((t,i) =>
+  `<button class="tbtn"><span class="dot" style="background:${REV_COLORS[t.id]}"></span>${t.n}</button>`).join('');
+document.querySelectorAll('#rev-teamsel .tbtn').forEach((b,i) => b.addEventListener('click', () => { revSel = i; renderRev(); }));
+
+$('#rev-table').addEventListener('input', e => {
+  const inp = e.target.closest('.rev-in'); if(!inp) return;
+  const key = 'rev-' + inp.dataset.rid + '-' + inp.dataset.m + '-' + inp.dataset.base;
+  STATE[key] = inp.value === '' ? '' : +inp.value;
+  saveState(STATE);
+  // update derived cells without rebuilding the table (keep focus)
+  const rt = REV_TEAMS[revSel];
+  const m = +inp.dataset.m;
+  const eq = document.querySelector(`[data-eq="${inp.dataset.rid}-${m}-${inp.dataset.base}"]`);
+  const v = revVal(inp.dataset.rid, m, inp.dataset.base);
+  if(eq) eq.textContent = v ? '= ' + fmtMan(v) : '';
+  const a = revGet(rt, m, 'in'), b = revGet(rt, m, 'tax'), gap = b - a;
+  const gc = document.querySelector(`[data-gap="${m}"]`);
+  if(gc){ gc.textContent = gap ? fmtMan(gap) : '—'; gc.className = 'r ' + (gap > 0 ? 'gap-pos' : 'gap-zero'); }
+  const months = Array.from({length:12}, (_,i) => i + 1);
+  const sumIn = months.reduce((s,mm) => s + revGet(rt, mm, 'in'), 0);
+  const sumTax = months.reduce((s,mm) => s + revGet(rt, mm, 'tax'), 0);
+  document.querySelector('[data-tot="in"]').textContent = fmtMan(sumIn);
+  document.querySelector('[data-tot="tax"]').textContent = fmtMan(sumTax);
+  document.querySelector('[data-tot="gap"]').textContent = fmtMan(sumTax - sumIn);
+  // summary + chart rebuild (no inputs inside)
+  const keep = document.activeElement;
+  const tman = rt.target ? rt.target * 10000 : null;
+  const cards = $('#rev-summary').children;
+  cards[1].querySelector('.v').textContent = fmtMan(sumIn) === '—' ? '0' : fmtMan(sumIn);
+  cards[1].querySelector('.s').textContent = tman ? '목표 대비 ' + (sumIn / tman * 100).toFixed(1) + '%' : '목표 미설정';
+  cards[2].querySelector('.v').textContent = fmtMan(sumTax) === '—' ? '0' : fmtMan(sumTax);
+  cards[2].querySelector('.s').textContent = tman ? '목표 대비 ' + (sumTax / tman * 100).toFixed(1) + '%' : '목표 미설정';
+  cards[3].querySelector('.v').textContent = fmtMan(sumTax - sumIn) === '—' ? '0' : fmtMan(sumTax - sumIn);
+  const maxV = Math.max(1, ...months.map(mm => Math.max(revGet(rt, mm, 'in'), revGet(rt, mm, 'tax'))));
+  $('#rchart').innerHTML = months.map(mm => {
+    const aa = revGet(rt, mm, 'in'), bb = revGet(rt, mm, 'tax');
+    return `<div class="rmon"><div class="rbars">
+      <div class="rbar" style="height:${(aa / maxV * 100).toFixed(1)}%;background:var(--t1)" title="${mm}월 입금 ${fmtMan(aa)}"></div>
+      <div class="rbar" style="height:${(bb / maxV * 100).toFixed(1)}%;background:var(--t2)" title="${mm}월 발행 ${fmtMan(bb)}"></div>
+    </div></div>`;
+  }).join('');
+  if(keep) keep.focus();
+});
+
+
+/* ================= ROADMAP ================= */
+$('#months').innerHTML = MONTHS.map(m =>
+  `<div class="mo"><div class="m">${m.m}</div><ul>${m.li.map(([cls,txt]) => `<li class="${cls}">${txt}</li>`).join('')}</ul></div>`).join('');
+$('#road-steps').innerHTML = STEPS.map(s =>
+  `<div class="card step-card"><div class="st">${s.s}</div><h4>${s.t}</h4><p>${s.d}</p><div class="why">${s.w}</div></div>`).join('');
+
+/* ================= INIT (shared board or local) ================= */
+(async function init(){
+  try{ if(window.claude && typeof window.claude.use === 'function'){ ART = await window.claude.use('artifact'); } }catch(e){ ART = null; }
+  if(ART){
+    MODE = 'shared';
+    try{ const r = await fetch('data/state.json', {cache:'no-store'}); if(r.ok){ const j = await r.json(); if(j && typeof j === 'object') STATE = j; } }catch(e){}
+  } else {
+    STATE = loadLocal();
+  }
+  renderTrackBody(); renderTrackSummary(); renderRev(); updateSaveNote(STATE);
+})();
+</script>
+
+</body></html>
