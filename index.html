@@ -855,7 +855,7 @@ body{background:var(--bg);color:var(--text-primary);font-family:'Pretendard Vari
       <div class="col-hdr"><div class="col-dot" style="background:var(--toss)"></div><div class="col-title"><span class="period-tag live">LIVE</span><span class="period-tag today" style="margin-left:4px;font-size:10px;opacity:.85">이번 달</span><span class="col-ico" aria-hidden="true">✍️</span> 계약 체결 라이브</div><div class="col-cnt" id="ctTotal">15</div><div class="col-u">건</div></div><div class="col-monthly" data-card="contract"><span class="col-monthly-data">1월 3건 · 2월 13건 · 3월 3건 · 4월 11건 · 5월 4건 · 6월 12건 · 7월 5건 · 8월 15건</span><span class="col-monthly-tail">2026년</span></div><div class="col-inner" id="contractFeed" aria-live="polite" aria-atomic="false" aria-relevant="additions"></div>
     </div>
     <div class="dual-col">
-      <div class="col-hdr"><div class="col-dot" style="background:var(--cyan)"></div><div class="col-title"><span class="period-tag live">LIVE</span><span class="period-tag today" style="margin-left:4px;font-size:10px;opacity:.85">이번 달</span><span class="col-ico" aria-hidden="true">💰</span> 입금 완료 라이브</div><div class="col-cnt" id="pmTotal">275</div><div class="col-u">건</div></div><div class="col-monthly" data-card="payment"><span class="col-monthly-data">1월 370건 · 2월 377건 · 3월 459건 · 4월 558건 · 5월 423건 · 6월 447건 · 7월 438건 · 8월 275건</span><span class="col-monthly-tail">2026년</span></div><div class="col-inner" id="paymentFeed" aria-live="polite" aria-atomic="false" aria-relevant="additions"></div>
+      <div class="col-hdr"><div class="col-dot" style="background:var(--cyan)"></div><div class="col-title"><span class="period-tag live">LIVE</span><span class="period-tag today" style="margin-left:4px;font-size:10px;opacity:.85">이번 달</span><span class="col-ico" aria-hidden="true">💰</span> 입금 완료 라이브</div><div class="col-cnt" id="pmTotal">302</div><div class="col-u">건</div></div><div class="col-monthly" data-card="payment"><span class="col-monthly-data">1월 370건 · 2월 377건 · 3월 459건 · 4월 558건 · 5월 423건 · 6월 447건 · 7월 438건 · 8월 302건</span><span class="col-monthly-tail">2026년</span></div><div class="col-inner" id="paymentFeed" aria-live="polite" aria-atomic="false" aria-relevant="additions"></div>
     </div>
   </div>
 </section>
@@ -1073,6 +1073,33 @@ function cItem(d,i,isNew){const e=document.createElement('div');e.className='fi'
 cHist.forEach((d,i)=>$('contractFeed').appendChild(cItem(d,i)));
 
 const pHist = [
+  {co:'쁨*로*의*(*동*',amt:3300000,time:'8/27'},
+  {co:'쁨*로*의*(*남*',amt:1980000,time:'8/27'},
+  {co:'예*주*쁨*원*제*)',amt:836000,time:'8/27'},
+  {co:'아*본*활*학*병*',amt:550000,time:'8/27'},
+  {co:'(주)서*개*',amt:495000,time:'8/27'},
+  {co:'쁨*로*의*(*동*',amt:330000,time:'8/27'},
+  {co:'지*건*(주)',amt:330000,time:'8/27'},
+  {co:'주식회사 서*산*',amt:308000,time:'8/27'},
+  {co:'지*병*',amt:297000,time:'8/27'},
+  {co:'주*회*독*자',amt:275000,time:'8/27'},
+  {co:'주식회사 우*종*건*',amt:220000,time:'8/27'},
+  {co:'주식회사 단*종*건*',amt:220000,time:'8/27'},
+  {co:'해*누*한*원',amt:191400,time:'8/27'},
+  {co:'닥*함*과*원',amt:165000,time:'8/27'},
+  {co:'레*트*원',amt:165000,time:'8/27'},
+  {co:'주식회사 다*건*',amt:165000,time:'8/27'},
+  {co:'에*치*스*합*설 주*회*',amt:165000,time:'8/27'},
+  {co:'계*종*건*',amt:165000,time:'8/27'},
+  {co:'(주)지*종*건*',amt:129250,time:'8/27'},
+  {co:'(주)지*종*건*',amt:129250,time:'8/27'},
+  {co:'(주)라*산*개*',amt:124850,time:'8/27'},
+  {co:'이*컴*니(주)',amt:117150,time:'8/27'},
+  {co:'월* E* 무*',amt:110000,time:'8/27'},
+  {co:'(주)한*종*건*',amt:93500,time:'8/27'},
+  {co:'(주)한*종*건*',amt:93500,time:'8/27'},
+  {co:'(주)준*건*',amt:66000,time:'8/27'},
+  {co:'(주)준*건*',amt:66000,time:'8/27'},
   {co:'(의)루*의*재* 나*병*',amt:5718300,time:'8/25'},
   {co:'주*회*쏘*디*인',amt:2585000,time:'8/25'},
   {co:'(의)천*의*재* 백*요*병*',amt:2488800,time:'8/25'},
@@ -1135,11 +1162,10 @@ let AI_MVP_DATA = {
       {name:'박진아',team:'경영지원팀',date:'8/28',title:'대시보드 재갱신에서 전월 동기 대비 +48.6%가 실질 성장이 아니라 \'정기 발행일 배치 착시\'임을 스스로…',body:'① 통장거래내역 동기화(자동): 클로브 로그인 만료로 경로B(MCP)로 폴백해 17개 계좌 전수 조회, 8/27분 57건 신규 반영(입금 40,989,200원·출금 7,876,740원). 잔액 연속성 불일치 0건, 중복 0건, 3개 계좌 최종잔액 클로브 현재잔액과 일치. 구분1 자동분류(복리후생비 29·매출 11·여비교통비 7 등)와 매입 부가세 수식(=F/1.1, =Q*0.1) 입력, 공제분 매입세액 300,579원 산출. ② 거래점명 소급 보완(능동): 사용자가 \'로그인 완료\'를 알리자 곧바로 8-b를 이어 실행해 ag-grid…',tool:'Claude',score:9},
       {name:'손지영',team:'기업지원팀',date:'8/28',title:'엑셀 계산기에 2027·2028년 구간을 추가한 직후 실제 대상자 3건을 연도 걸침 케이스로 곧바로 검증한…',body:'출산육아기고용안정장려금 中 대체인력지원금 업무에 집중 활용. ① 직접 제작한 \'대체인력지원금 산정 스킬\'과 엑셀 계산기에 대해 Before/After/제작과정/교훈 4항목 회고 정리 요청(사내 공유용). ② 지원금 산정 계산기(월별 내역형) 엑셀 파일에 2027·2028년 단가 구간 블록을 추가 수정(2027·2028은 2026 동일 단가 가정 명시). ③ 실제 대상자 3건을 30인 이상·연도 걸침(2025→2026) 케이스로 실계산: 2025-12-23~2026-05-09→5,925,806원, 2025-09-29~2026-01-2…',tool:'Claude',score:8.5},
       {name:'이새봄',team:'HR사업본부',date:'8/28',title:'더홍코리아 박가빈 퇴직금 건 — 지급명세서 3종의 세전 퇴직금·소득세액을 수치로 비교해 통산 근속 시 세액…',body:'① 자문·세무: ㈜더홍코리아 박가빈 퇴직금 건 — 지급명세서 3종(개인+법인 통산/법인한정/전체통산) 산정차이·퇴직소득세액 차액 분석, 종된사업장 편입에 따른 근로관계 승계 법리 검토(대법 2018다54705, 2020.11.5.; 대법 93다33173, 1994.6.28.), 소득세법 §147·§148 기반 정산방안(1안) 설계 및 사업장·근로자 안내문 작성 ② 사건(산재): 김해정(왼쪽 손목 드퀘르벵 건염) 재해자 통화 내용을 인적사항·직업력·수술 타임라인·기왕증 방어 논리·입증 포인트 8개 항목으로 구조화 정리 → 재해발생경위…',tool:'Claude',score:8},
+      {name:'이성미',team:'노무관리팀',date:'8/28',title:'사업장에서 근무확인사실서 서식을 요청한 상황에서, 노동OK 사이트 안내 메일 초안을 바로 요청 → AI가 제…',body:'- 신규 자문 사업장 담당자 배정 인사 통화 스크립트 및 정보수집(상용직 급여일·입퇴사 통보방식, 건강연금 노임대장 수령일, 고용산재 일용직 신고방식, 퇴직공제 등) 질문 리스트 작성 - 사내 안내 메시지(음료 제공 공지) 말투 검토 - 근무확인사실서 요청 대응 메일 제목·본문 작성 (노동OK→예스폼 경유 안내 반영해 재수정) - 신규 사업장 대상 공동인증서 비밀번호 요청, 일용직 프로그램 설치 안내, 건강EDI 가입정보 요청 메일 다듬기',tool:'Claude',score:7},
       {name:'곽대영',team:'기업지원팀',date:'8/28',title:'[사실] 원동요양병원 퇴직연금 가입자 87명 검증 — 텍스트 추출이 불가한 팩스 스캔 PDF 5매(109행)…',body:'1) [사실] 「퇴직연금 가입자수 확인」 — 원동요양병원(의료법인 고려의료재단) NH농협은행 퇴직연금 가입확인서(2024.11.21 발급)에 기재된 가입자 87명의 산출근거를 검증. 팩스 스캔본 PDF 2건(가입확인서 1매 + 기업부담금 납입현황 5매, 총 109행)을 이미지 판독으로 전수 집계하여 87명 = 109명 − 연중 탈퇴 22명임을 확인. - 최종납입일자별 분류: 2023-12-27 납입 84명 / 2023-11-15·11-28 납입 3명(위영조·정옥자·한영숙) → 87명, 2023-06-28~10-17 최종납입 22…',tool:'Claude',score:7},
       {name:'김동우',team:'기업지원팀',date:'8/28',title:'[Claude Code] 임채 2023년 미신청 건 검증 세션. "진짜 신청 가능한 거 맞아?"라는 재확인…',body:'[Claude Code] 임채부담금 검토관리 DB에서 2023년분 미신청 건 리스트업 요청 → 1차 집계(1,017건) 후 사용자 재검증 요청에 따라 진행중단·계약미체결·보고서발송&진행대기 등 검증 4종을 추가 적용해 과대집계를 스스로 교정 → 실제 착수 가능 건만 사업장명·금액·담당자·최근 진행상황 포함 엑셀로 산출. [Claude Code] 원텍 결과보고서 발송 후속 — insurance-refund-kr 스킬 기반으로 대상자 3명(등기임원) 취소신고 1·상실신고 2 구분, 대상자별 환급 예상액과 수임료 25%(부가세 별도) 청…',tool:'Claude',score:7},
-      {name:'이성미',team:'노무관리팀',date:'8/28',title:'사업장에서 근무확인사실서 서식을 요청한 상황에서, 노동OK 사이트 안내 메일 초안을 바로 요청 → AI가 제…',body:'- 신규 자문 사업장 담당자 배정 인사 통화 스크립트 및 정보수집(상용직 급여일·입퇴사 통보방식, 건강연금 노임대장 수령일, 고용산재 일용직 신고방식, 퇴직공제 등) 질문 리스트 작성 - 사내 안내 메시지(음료 제공 공지) 말투 검토 - 근무확인사실서 요청 대응 메일 제목·본문 작성 (노동OK→예스폼 경유 안내 반영해 재수정) - 신규 사업장 대상 공동인증서 비밀번호 요청, 일용직 프로그램 설치 안내, 건강EDI 가입정보 요청 메일 다듬기',tool:'Claude',score:7},
-      {name:'조소윤',team:'HR사업본부',date:'8/28',title:'[의견] 대화 주제: 월말 적용제외 매출 집계 자동화 → 결과: Notion 수식(formula) 속성이 S…',body:'[사실] 2026-08-28(금) 기준, 조소윤님이 직접 질문·대화한 세션은 0건. 사전 설계된 자동화 스케줄 작업만 실행됨. ① 적용제외 매출 집계(월말 실행일 판정 로직 통과) — Notion「수임료입금완료」뷰 전수 조회 → 대상 신청자 6인 필터링 → 매칭 16건(전원 김수빈) 추출 → 연결된 2026년 세금계산서 레코드에서 입금액·제비용 실측값 조회 후 영업이익 산출(접수금액 합계 304,238,780원 / 수임료 VAT포함 117,421,000원 / 영업이익 83,175,440원). ② Team schedule alert…',tool:'Claude',score:3},
-      {name:'길경찬',team:'기업지원팀',date:'8/28',title:'kkc-daily-work-journal 자동 실행 — 08-27자 연락일지·자료요청·접수 원천 3개 소스를…',body:'당일 실행된 세션은 스케줄 자동화 2건뿐이며, 본인이 직접 프롬프트를 입력한 대화는 0건이다. ① ai----1000(10:00경) — 08-27자 AI 활용일지 백필·기록 및 윤상필 멘션. ② kkc-daily-work-journal(09:07경) — 08-27자 업무일지 7건(연락일지 4·자료요청 2·접수 1) 자동 생성, 사업장 relation·완료 체크박스·예상금액 매핑 완료. 즉, AI는 \'기록 자동화\'에만 쓰였고 당일 실제 검토업무(임채부담금 경감·적용제외·출산육아기·4대보험 환급 최초검토, (주)유이씨 청년일자리도약장려…',tool:'Claude',score:0}
+      {name:'조소윤',team:'HR사업본부',date:'8/28',title:'[의견] 대화 주제: 월말 적용제외 매출 집계 자동화 → 결과: Notion 수식(formula) 속성이 S…',body:'[사실] 2026-08-28(금) 기준, 조소윤님이 직접 질문·대화한 세션은 0건. 사전 설계된 자동화 스케줄 작업만 실행됨. ① 적용제외 매출 집계(월말 실행일 판정 로직 통과) — Notion「수임료입금완료」뷰 전수 조회 → 대상 신청자 6인 필터링 → 매칭 16건(전원 김수빈) 추출 → 연결된 2026년 세금계산서 레코드에서 입금액·제비용 실측값 조회 후 영업이익 산출(접수금액 합계 304,238,780원 / 수임료 VAT포함 117,421,000원 / 영업이익 83,175,440원). ② Team schedule alert…',tool:'Claude',score:3}
     ],
   bestCaseRangeLabel: '8/28',
   /* [v8 인사팀] 팀별 활용 분포 — 이번 달 누적 일지 건수 (내림차순)
@@ -1149,8 +1175,8 @@ let AI_MVP_DATA = {
       {dateStr:'2026-08-24', used:3, entries:6, rate:27, isFuture:false},
       {dateStr:'2026-08-25', used:5, entries:8, rate:45, isFuture:false},
       {dateStr:'2026-08-26', used:4, entries:5, rate:36, isFuture:false},
-      {dateStr:'2026-08-27', used:4, entries:6, rate:36, isFuture:false},
-      {dateStr:'2026-08-28', used:4, entries:7, rate:36, isFuture:false}
+      {dateStr:'2026-08-27', used:5, entries:7, rate:45, isFuture:false},
+      {dateStr:'2026-08-28', used:3, entries:6, rate:27, isFuture:false}
     ]},
     {team:'노무관리팀', total:10, avgRate:12, weekEntries:22, daily:[
       {dateStr:'2026-08-24', used:1, entries:6, rate:10, isFuture:false},
@@ -3047,7 +3073,7 @@ const newC=[{team:'자문팀',cat:'노동사건'},{team:'건설팀',cat:'건설�
 const newP=[{co:'(주)강동엔지니어링',amt:3300000},{co:'에스원월드',amt:1100000},
   {co:'머니무브(주)',amt:2200000},{co:'정형외과의원',amt:220000},
   {co:'마틸다네일샵',amt:2200000},{co:'거산테크',amt:550000}];
-let ci=0,pi=0,ctT=15,pmT=275,leadN=14,srcN=8,srcG=4,srcB=2,cnTotal=14,cnToday=5;
+let ci=0,pi=0,ctT=15,pmT=302,leadN=14,srcN=8,srcG=4,srcB=2,cnTotal=14,cnToday=5;
 function now(){return new Date().toTimeString().slice(0,5);}
 
 function pushContract(){const d=newC[ci%newC.length];ci++;d.time=now();const prev=ctT;ctT++;
