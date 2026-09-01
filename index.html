@@ -852,10 +852,12 @@ body{background:var(--bg);color:var(--text-primary);font-family:'Pretendard Vari
 <section class="card contract-card live-row" id="cardDual" aria-label="계약 체결 및 입금 완료 실시간 피드" style="grid-row:3;grid-column:1/3;">
   <div class="dual-feed">
     <div class="dual-col">
-      <div class="col-hdr"><div class="col-dot" style="background:var(--toss)"></div><div class="col-title"><span class="period-tag live">LIVE</span><span class="period-tag today" style="margin-left:4px;font-size:10px;opacity:.85">이번 달</span><span class="col-ico" aria-hidden="true">✍️</span> 계약 체결 라이브</div><div class="col-cnt" id="ctTotal">15</div><div class="col-u">건</div></div><div class="col-monthly" data-card="contract"><span class="col-monthly-data">1월 3건 · 2월 13건 · 3월 3건 · 4월 11건 · 5월 4건 · 6월 12건 · 7월 5건 · 8월 15건</span><span class="col-monthly-tail">2026년</span></div><div class="col-inner" id="contractFeed" aria-live="polite" aria-atomic="false" aria-relevant="additions"></div>
+      <div class="col-hdr"><div class="col-dot" style="background:var(--toss)"></div><div class="col-title"><span class="period-tag live">LIVE</span><span class="period-tag today" style="margin-left:4px;font-size:10px;opacity:.85">전월</span><span class="col-ico" aria-hidden="true">✍️</span> 계약 체결 라이브</div><div class="col-cnt" id="ctTotal">15</div><div class="col-u">건</div></div><div class="col-monthly" data-card="contract"><span class="col-monthly-data">1월 3건 · 2월 13건 · 3월 3건 · 4월 11건 · 5월 4건 · 6월 12건 · 7월 5건 · 8월 15건</span><span class="col-monthly-tail">2026년</span></div>
+      <div class="col-hint">이번 달(9월) 첫 계약 입력 대기 중 — 8월 마지막 5건 표시</div><div class="col-inner" id="contractFeed" aria-live="polite" aria-atomic="false" aria-relevant="additions"></div>
     </div>
     <div class="dual-col">
-      <div class="col-hdr"><div class="col-dot" style="background:var(--cyan)"></div><div class="col-title"><span class="period-tag live">LIVE</span><span class="period-tag today" style="margin-left:4px;font-size:10px;opacity:.85">이번 달</span><span class="col-ico" aria-hidden="true">💰</span> 입금 완료 라이브</div><div class="col-cnt" id="pmTotal">302</div><div class="col-u">건</div></div><div class="col-monthly" data-card="payment"><span class="col-monthly-data">1월 370건 · 2월 377건 · 3월 459건 · 4월 558건 · 5월 423건 · 6월 447건 · 7월 438건 · 8월 302건</span><span class="col-monthly-tail">2026년</span></div><div class="col-inner" id="paymentFeed" aria-live="polite" aria-atomic="false" aria-relevant="additions"></div>
+      <div class="col-hdr"><div class="col-dot" style="background:var(--cyan)"></div><div class="col-title"><span class="period-tag live">LIVE</span><span class="period-tag today" style="margin-left:4px;font-size:10px;opacity:.85">전월</span><span class="col-ico" aria-hidden="true">💰</span> 입금 완료 라이브</div><div class="col-cnt" id="pmTotal">305</div><div class="col-u">건</div></div><div class="col-monthly" data-card="payment"><span class="col-monthly-data">1월 370건 · 2월 377건 · 3월 459건 · 4월 558건 · 5월 423건 · 6월 447건 · 7월 438건 · 8월 305건</span><span class="col-monthly-tail">2026년</span></div>
+      <div class="col-hint">이번 달(9월) 첫 입금 입력 대기 중 — 8월 마지막 5건 표시</div><div class="col-inner" id="paymentFeed" aria-live="polite" aria-atomic="false" aria-relevant="additions"></div>
     </div>
   </div>
 </section>
@@ -1073,6 +1075,7 @@ function cItem(d,i,isNew){const e=document.createElement('div');e.className='fi'
 cHist.forEach((d,i)=>$('contractFeed').appendChild(cItem(d,i)));
 
 const pHist = [
+  {co:'형*갈*',amt:330000,time:'8/30'},
   {co:'쁨*로*의*(*동*',amt:3300000,time:'8/27'},
   {co:'쁨*로*의*(*남*',amt:1980000,time:'8/27'},
   {co:'예*주*쁨*원*제*)',amt:836000,time:'8/27'},
@@ -1100,6 +1103,7 @@ const pHist = [
   {co:'(주)한*종*건*',amt:93500,time:'8/27'},
   {co:'(주)준*건*',amt:66000,time:'8/27'},
   {co:'(주)준*건*',amt:66000,time:'8/27'},
+  {co:'주식회사 제*종*건*',amt:275000,time:'8/27'},
   {co:'(의)루*의*재* 나*병*',amt:5718300,time:'8/25'},
   {co:'주*회*쏘*디*인',amt:2585000,time:'8/25'},
   {co:'(의)천*의*재* 백*요*병*',amt:2488800,time:'8/25'},
@@ -1129,7 +1133,8 @@ const pHist = [
   {co:'시*마*설(주)',amt:330000,time:'8/24'},
   {co:'주식회사 이*건*',amt:330000,time:'8/24'},
   {co:'주*회*아*튼',amt:330000,time:'8/24'},
-  {co:'태*지*텍(주)',amt:330000,time:'8/24'}
+  {co:'태*지*텍(주)',amt:330000,time:'8/24'},
+  {co:'태*케*칼(주)',amt:220000,time:'8/13'}
 ];
 function pItem(d,i,isNew){const e=document.createElement('div');e.className='fi';
   e.innerHTML=`<div class="fi-status" style="background:var(--cyan)"></div><div class="fi-info"><div class="fi-team">${d.co}</div><div class="fi-meta">입금 완료 · ${d.time||'방금'}</div></div>${isNew?'<span class="fi-new">NEW</span>':''}<div class="fi-amt">${fmt(d.amt)}</div>`;
@@ -1169,8 +1174,8 @@ let AI_MVP_DATA = {
   /* [v8 인사팀] 팀별 활용 분포 — 이번 달 누적 일지 건수 (내림차순)
      주: 급여파트는 노무관리팀에 합산 (TEAM_ALIAS) */
   weeklyGrid: [
-    {team:'기업지원팀', total:11, avgRate:9, weekEntries:3, daily:[
-      {dateStr:'2026-08-31', used:1, entries:3, rate:9, isFuture:false},
+    {team:'기업지원팀', total:11, avgRate:9, weekEntries:4, daily:[
+      {dateStr:'2026-08-31', used:1, entries:4, rate:9, isFuture:false},
       {dateStr:'2026-09-01', used:0, entries:0, rate:0, isFuture:true},
       {dateStr:'2026-09-02', used:0, entries:0, rate:0, isFuture:true},
       {dateStr:'2026-09-03', used:0, entries:0, rate:0, isFuture:true},
